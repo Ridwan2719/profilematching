@@ -14,13 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', function() {
+Route::get('/home', function () {
     return view('home');
 })->name('home')->middleware('auth');
+Route::group(['middleware' => 'auth'], function () {
+    // Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    //     \UniSharp\LaravelFilemanager\Lfm::routes();
+    // });
+    Route::prefix('/home')->group(function () {
+        Route::resource('penilaian', 'PenilaianController');
+        Route::get('datatablepenilaian', 'PenilaianController@dataTables')->name('datatablepenilaian');
+    });
+});
