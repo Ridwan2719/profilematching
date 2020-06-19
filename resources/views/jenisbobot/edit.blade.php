@@ -35,7 +35,7 @@
                 <div class="form-group row">
                     <label for="nama" class="col-2 col-form-label">Keterangan</label>
                     <div class="col-10">
-                        <input class="form-control" type="text" value="{{$penilaian->keterangan}}" name="keterangan" />
+                        <input class="form-control" type="text" value="{{$jenisbobot->keterangan}}" name="keterangan" />
                     </div>
                 </div>
 

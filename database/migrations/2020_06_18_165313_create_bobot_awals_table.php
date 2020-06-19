@@ -15,9 +15,11 @@ class CreateBobotAwalsTable extends Migration
     {
         Schema::create('bobot_awals', function (Blueprint $table) {
             $table->id();
+            $table->string('gap_a');
+            $table->string('gap_b');
             $table->string('keterangan');
-            $table->string('bobot');
-            $table->string('nilai_gap');
+            $table->string('nilai');
+            $table->string('jenisbobot_id');
             $table->timestamps();
         });
     }

@@ -248,10 +248,34 @@ return [
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],
-        // ['header' => 'account_settings'],
+        [
+            'text'    => 'Master',
+            'icon'    => 'fas fa-fw fa-share',
+            'url'=>'#',
+            'submenu' => [
+                [
+                    'text' => 'Jenis Bobot',
+                    'route'  => 'jenisbobot.index',
+                    'icon'    => 'fas fa-fw fa-share',
+                ],
+                [
+                    'text' => 'Bobot',
+                    'route'  => 'bobot.index',
+                    'icon'    => 'fas fa-fw fa-share',
+                ],
+                [
+                    'text' => 'Kriteria',
+                    'route'  => 'kriteria.index',
+                    'icon'    => 'fas fa-fw fa-share',
+
+                ],
+                
+            ],
+        ],
+        // ['header' => 'Master'],
         // [
-        //     'text' => 'profile',
-        //     'url'  => 'admin/settings',
+        //     'text' => 'Bobot',
+        //     'route'  => 'bobot.index',
         //     'icon' => 'fas fa-fw fa-user',
         // ],
         // [
@@ -259,44 +283,7 @@ return [
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
-        // [
-        //     'text'    => 'multilevel',
-        //     'icon'    => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text'    => 'level_one',
-        //             'url'     => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url'  => '#',
-        //                 ],
-        //                 [
-        //                     'text'    => 'level_two',
-        //                     'url'     => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
+
         // ['header' => 'labels'],
         // [
         //     'text'       => 'important',

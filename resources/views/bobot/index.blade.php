@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Penilaian')
+@section('title', 'Master Bobot')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Penilaian</h1>
+<h1 class="m-0 text-dark">Bobot</h1>
 @stop
 
 @section('content')
@@ -15,15 +15,15 @@
             <strong>{{ $message }}</strong>
         </div>
         @endif
-        
+
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Data Penilaian</h3>
+                    Data Bobot</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('penilaian.create') }}" class="btn btn-primary  btn-sm btn-flat">
-                        Tambah baru Penilaian
+                    <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                        Tambah baru Bobot
                     </a>
                 </div>
             </div>
@@ -34,8 +34,11 @@
                     <thead>
                         <tr>
                             <th witdh="5%">No</th>
-                            <th witdh="85%">Penilaian</th>
-                            <th witdh="10%">Aksi</th>
+                            <th witdh="20%">Jenis Bobot</th>
+                            <th witdh="30%">Keterangan</th>
+                            <th witdh="15%">GAP A</th>
+                            <th witdh="15%">GAP B</th>
+                            <th witdh="15%">Nilai</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -173,7 +176,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    'url': "{!! route('datatablepenilaian') !!}",
+                    'url': "{!! route('tableBobot') !!}",
                     "type": "GET"
                 },
                 columns: [{
@@ -183,13 +186,26 @@
                         searchable: false
                     },
                     {
+                        data: 'jenisbobot.keterangan',
+                        name: 'jenisbobot.keterangan'
+                    },
+                    {
                         data: 'keterangan',
                         name: 'keterangan'
                     },
                     {
-                        data: 'action',
-                        name: 'action'
+                        data: 'gap_a',
+                        name: 'gap_a'
                     },
+                    {
+                        data: 'gap_b',
+                        name: 'gap_a'
+                    },
+                    {
+                        data: 'nilai',
+                        name: 'nilai'
+                    },
+
                 ]
             });
 

@@ -15,9 +15,10 @@ class CreateKriteriasTable extends Migration
     {
         Schema::create('kriterias', function (Blueprint $table) {
             $table->id();
+            $table->string('penilaian_id');
+            $table->string('jenis');
             $table->string('keterangan');
             $table->string('nilai');
-            $table->string('penilaian_id');
             $table->timestamps();
         });
     }

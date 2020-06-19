@@ -16,9 +16,9 @@ class CreateHasilsTable extends Migration
         Schema::create('hasils', function (Blueprint $table) {
             $table->id();
             $table->string('atlet_id');
-            $table->string('nilai_core');
-            $table->string('nilai_scondary');
-            $table->string('hasil');
+            $table->string('penilaian_id');
+            $table->string('nilai');
+            $table->string('rank');
             $table->string('periode_id');
             $table->timestamps();
         });

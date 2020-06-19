@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ProfilPosisi;
+use App\Temphasil;
 use Illuminate\Http\Request;
 
-class ProfilPosisiController extends Controller
+class TemphasilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProfilPosisiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProfilPosisi  $profilPosisi
+     * @param  \App\Temphasil  $temphasil
      * @return \Illuminate\Http\Response
      */
-    public function show(ProfilPosisi $profilPosisi)
+    public function show(Temphasil $temphasil)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProfilPosisiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProfilPosisi  $profilPosisi
+     * @param  \App\Temphasil  $temphasil
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProfilPosisi $profilPosisi)
+    public function edit(Temphasil $temphasil)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProfilPosisiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProfilPosisi  $profilPosisi
+     * @param  \App\Temphasil  $temphasil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProfilPosisi $profilPosisi)
+    public function update(Request $request, Temphasil $temphasil)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProfilPosisiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProfilPosisi  $profilPosisi
+     * @param  \App\Temphasil  $temphasil
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProfilPosisi $profilPosisi)
+    public function destroy(Temphasil $temphasil)
     {
         //
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfilPosisisTable extends Migration
+class CreateCoresecondariesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateProfilPosisisTable extends Migration
      */
     public function up()
     {
-        Schema::create('profil_posisis', function (Blueprint $table) {
+        Schema::create('coresecondaries', function (Blueprint $table) {
             $table->id();
-            $table->string('subkriteria_id');
-            $table->string('nilai');
+            $table->string("penilaian_id");
+            $table->string("atlet_id");
+            $table->string("core");
+            $table->string("second");
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateProfilPosisisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profil_posisis');
+        Schema::dropIfExists('coresecondaries');
     }
 }

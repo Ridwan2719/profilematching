@@ -28,7 +28,20 @@ Route::group(['middleware' => 'auth'], function () {
     //     \UniSharp\LaravelFilemanager\Lfm::routes();
     // });
     Route::prefix('/home')->group(function () {
+
+
         Route::resource('penilaian', 'PenilaianController');
         Route::get('datatablepenilaian', 'PenilaianController@dataTables')->name('datatablepenilaian');
+
+        Route::resource('jenisbobot', 'JenisbobotController');
+        Route::get('tableJenisbobot', 'JenisbobotController@dataTables')->name('tableJenisbobot');
+
+        Route::resource('bobot', 'BobotAwalController');
+        Route::get('tableBobot', 'BobotAwalController@dataTables')->name('tableBobot');
+
+
+
+        Route::resource('kriteria', 'KriteriaController');
+        Route::get('tableKriteria', 'KriteriaController@dataTables')->name('tableKriteria');
     });
 });

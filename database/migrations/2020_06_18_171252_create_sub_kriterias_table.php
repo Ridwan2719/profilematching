@@ -16,8 +16,8 @@ class CreateSubKriteriasTable extends Migration
         Schema::create('sub_kriterias', function (Blueprint $table) {
             $table->id();
             $table->string('keterangan');
-            $table->string('nilai');
             $table->string('kriteria_id');
+            $table->string('nilai');
 
             $table->timestamps();
         });

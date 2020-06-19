@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Penilaian')
+@section('title', 'Master Jenis Bobot')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Penilaian</h1>
+<h1 class="m-0 text-dark">Jenis Bobot</h1>
 @stop
 
 @section('content')
@@ -15,15 +15,15 @@
             <strong>{{ $message }}</strong>
         </div>
         @endif
-        
+
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Data Penilaian</h3>
+                    Data Jenis Bobot</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('penilaian.create') }}" class="btn btn-primary  btn-sm btn-flat">
-                        Tambah baru Penilaian
+                    <a href="{{ route('jenisbobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                        Tambah Jenis Bobot
                     </a>
                 </div>
             </div>
@@ -34,8 +34,7 @@
                     <thead>
                         <tr>
                             <th witdh="5%">No</th>
-                            <th witdh="85%">Penilaian</th>
-                            <th witdh="10%">Aksi</th>
+                            <th witdh="95%">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -173,7 +172,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    'url': "{!! route('datatablepenilaian') !!}",
+                    'url': "{!! route('tableJenisbobot') !!}",
                     "type": "GET"
                 },
                 columns: [{
@@ -185,10 +184,6 @@
                     {
                         data: 'keterangan',
                         name: 'keterangan'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action'
                     },
                 ]
             });

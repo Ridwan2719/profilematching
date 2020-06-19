@@ -16,6 +16,7 @@ class CreatePenilaiansTable extends Migration
         Schema::create('penilaians', function (Blueprint $table) {
             $table->id();
             $table->string('keterangan');
+            $table->string('bobot');
             $table->timestamps();
         });
     }

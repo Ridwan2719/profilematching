@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\BobotAwal;
+use App\Jenisbobot;
 use Illuminate\Http\Request;
 
-class BobotAwalController extends Controller
+class JenisbobotController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function dataTables()
     {
-        $query = \App\BobotAwal::with('jenisbobot')->orderBy('id', 'desc');
+        $query = \App\Jenisbobot::orderBy('id', 'desc');
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -27,15 +32,10 @@ class BobotAwalController extends Controller
             // ->rawColumns(['other-columns'])
             ->make(true);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
-        return view("bobot.index");
+        return view('jenisbobot.index');
     }
 
     /**
@@ -46,7 +46,7 @@ class BobotAwalController extends Controller
     public function create()
     {
         //
-        return view("bobot.create");
+        return view('jenisbobot.create');
     }
 
     /**
@@ -60,28 +60,23 @@ class BobotAwalController extends Controller
         //
         $validatedData = $request->validate([
             'keterangan' => 'required',
-            'gap_a' => 'required',
-            'gap_b' => 'required',
-            'nilai' => 'required',
+           
         ]);
-        $penilaian = new \App\BobotAwal;
+        $penilaian = new \App\Jenisbobot();
         $penilaian->keterangan = $request->input('keterangan');
-        $penilaian->gap_a = $request->input('gap_a');
-        $penilaian->gap_b = $request->input('gap_b');
-        $penilaian->nilai = $request->input('nilai');
-        $penilaian->jenisbobot_id = $request->input('jenis_bobot_id');
+       
         $penilaian->save();
-        return  redirect()->route('bobot.index')
+        return  redirect()->route('jenisbobot.index')
             ->with('success', 'Berhasil Di Simpan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\BobotAwal  $bobotAwal
+     * @param  \App\Jenisbobot  $jenisbobot
      * @return \Illuminate\Http\Response
      */
-    public function show(BobotAwal $bobotAwal)
+    public function show(Jenisbobot $jenisbobot)
     {
         //
     }
@@ -89,10 +84,10 @@ class BobotAwalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\BobotAwal  $bobotAwal
+     * @param  \App\Jenisbobot  $jenisbobot
      * @return \Illuminate\Http\Response
      */
-    public function edit(BobotAwal $bobotAwal)
+    public function edit(Jenisbobot $jenisbobot)
     {
         //
     }
@@ -101,10 +96,10 @@ class BobotAwalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BobotAwal  $bobotAwal
+     * @param  \App\Jenisbobot  $jenisbobot
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BobotAwal $bobotAwal)
+    public function update(Request $request, Jenisbobot $jenisbobot)
     {
         //
     }
@@ -112,13 +107,11 @@ class BobotAwalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BobotAwal  $bobotAwal
+     * @param  \App\Jenisbobot  $jenisbobot
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BobotAwal $bobotAwal)
+    public function destroy(Jenisbobot $jenisbobot)
     {
         //
-        $bobotAwal->delete();
-        return $this->sendResponse($bobotAwal->toArray(), 'penilaian deleted successfully.');
     }
 }

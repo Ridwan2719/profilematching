@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Ranking;
+use App\Coresecondary;
 use Illuminate\Http\Request;
 
-class RankingController extends Controller
+class CoresecondaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class RankingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Ranking  $ranking
+     * @param  \App\Coresecondary  $coresecondary
      * @return \Illuminate\Http\Response
      */
-    public function show(Ranking $ranking)
+    public function show(Coresecondary $coresecondary)
     {
         //
     }
@@ -52,10 +52,10 @@ class RankingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ranking  $ranking
+     * @param  \App\Coresecondary  $coresecondary
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ranking $ranking)
+    public function edit(Coresecondary $coresecondary)
     {
         //
     }
@@ -64,10 +64,10 @@ class RankingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ranking  $ranking
+     * @param  \App\Coresecondary  $coresecondary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ranking $ranking)
+    public function update(Request $request, Coresecondary $coresecondary)
     {
         //
     }
@@ -75,10 +75,10 @@ class RankingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Ranking  $ranking
+     * @param  \App\Coresecondary  $coresecondary
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ranking $ranking)
+    public function destroy(Coresecondary $coresecondary)
     {
         //
     }
