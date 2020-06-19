@@ -38,7 +38,6 @@
                 </div>
             </div>
             <div class="card-body">
-
                 <div class="form-group row">
                     <label for="nama" class="col-2 col-form-label">Keterangan</label>
                     <div class="col-10">
