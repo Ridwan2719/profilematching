@@ -47,7 +47,6 @@ class PenilaianController extends Controller
     {
         //
         return view('penilaian.create');
-
     }
 
     /**
@@ -66,7 +65,7 @@ class PenilaianController extends Controller
         $penilaian->keterangan = $request->input('keterangan');
         $penilaian->save();
         return  redirect()->route('penilaian.index')
-            ->with('success','Berhasil Di Simpan');
+            ->with('success', 'Berhasil Di Simpan');
     }
 
     /**
@@ -114,6 +113,5 @@ class PenilaianController extends Controller
         //
         $penilaian->delete();
         return $this->sendResponse($penilaian->toArray(), 'penilaian deleted successfully.');
-
     }
 }
