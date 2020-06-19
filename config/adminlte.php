@@ -245,8 +245,8 @@ return [
             'text'        => 'Penilaian',
             'route'         => 'penilaian.index',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
         ],
         // ['header' => 'account_settings'],
         // [

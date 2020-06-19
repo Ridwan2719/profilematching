@@ -77,6 +77,7 @@ class PenilaianController extends Controller
     public function show(Penilaian $penilaian)
     {
         //
+       
     }
 
     /**
@@ -88,6 +89,7 @@ class PenilaianController extends Controller
     public function edit(Penilaian $penilaian)
     {
         //
+       
     }
 
     /**
@@ -100,6 +102,14 @@ class PenilaianController extends Controller
     public function update(Request $request, Penilaian $penilaian)
     {
         //
+        $validatedData = $request->validate([
+            'keterangan' => 'required',
+        ]);
+        $penilaian = \App\Penilaian::find($penilaian->id);
+        $penilaian->keterangan = $request->input('keterangan');
+        $penilaian->save();
+        return  redirect()->route('penilaian.index')
+            ->with('success', 'Berhasil Di Simpan');
     }
 
     /**

@@ -9,6 +9,22 @@
 @section('content')
 <div class="row">
     <div class="col-12">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+        @endif
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> ada masalah input data!.
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
@@ -27,7 +43,7 @@
                     <thead>
                         <tr>
                             <th witdh="5%">No</th>
-                            <th witdh="40%">Penilaian</th>
+                            <th witdh="85%">Penilaian</th>
                             <th witdh="10%">Aksi</th>
                         </tr>
                     </thead>
@@ -82,7 +98,7 @@
 
                         }).catch(error => {
                             table.draw();
-                           
+
 
                         });
                     }
