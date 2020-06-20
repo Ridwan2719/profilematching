@@ -47,5 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('periode', 'PeriodeController');
         Route::get('tablePeriode', 'PeriodeController@dataTables')->name('tablePeriode');
+       
+        Route::resource('atlet', 'AtletController');
+        Route::get('tableAtlet', 'AtletController@dataTables')->name('tableAtlet');
     });
 });

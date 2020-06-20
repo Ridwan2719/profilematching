@@ -12,9 +12,31 @@ class AtletController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dataTables()
+    {
+        $query = \App\Atlet::orderBy('id', 'desc');
+        //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
+        return \Yajra\Datatables\Datatables::of($query)
+            //$query di masukkan kedalam Datatables
+            ->addColumn('action', function ($q) {
+                //Kemudian kita menambahkan kolom baru , yaitu "action"
+                return view('links', [
+                    //Kemudian dioper ke file links.blade.php
+                    'model'      => $q,
+                    'url_edit'   => route('atlet.edit', $q->id),
+                    'url_hapus'  => route('bobot.destroy', $q->id),
+                    // 'url_detail' => route('penilaian.show', $q->id),
+                ]);
+            })
+
+            ->addIndexColumn()
+            // ->rawColumns(['other-columns'])
+            ->make(true);
+    }
     public function index()
     {
         //
+        return view("atlet.index");
     }
 
     /**
@@ -25,6 +47,7 @@ class AtletController extends Controller
     public function create()
     {
         //
+        return view('atlet.create');
     }
 
     /**
@@ -36,6 +59,18 @@ class AtletController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'kelas' => 'required',
+            'umur' => 'required',
+        ]);
+        $penilaian = new \App\Atlet();
+        $penilaian->umur = $request->input('umur');
+        $penilaian->kelas = $request->input('kelas');
+        $penilaian->nama = $request->input('nama');
+        $penilaian->save();
+        return  redirect()->route('atlet.index')
+            ->with('success', 'Berhasil Di Simpan');
     }
 
     /**
@@ -58,6 +93,7 @@ class AtletController extends Controller
     public function edit(Atlet $atlet)
     {
         //
+        return view('atlet.edit',compact('atlet'));
     }
 
     /**
@@ -70,6 +106,18 @@ class AtletController extends Controller
     public function update(Request $request, Atlet $atlet)
     {
         //
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'kelas' => 'required',
+            'umur' => 'required',
+        ]);
+        $penilaian = \App\Atlet::find($atlet->id);
+        $penilaian->umur = $request->input('umur');
+        $penilaian->kelas = $request->input('kelas');
+        $penilaian->nama = $request->input('nama');
+        $penilaian->save();
+        return  redirect()->route('atlet.index')
+            ->with('success', 'Berhasil Di Update');
     }
 
     /**

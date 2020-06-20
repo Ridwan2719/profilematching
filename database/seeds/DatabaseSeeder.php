@@ -43,11 +43,11 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\JenisKriteria::create([
             'keterangan' => "Core Factor",
-            'nilai'=>60,
+            'nilai' => 60,
         ]);
         \App\JenisKriteria::create([
             'keterangan' => "Secondary Factor",
-            'nilai'=>40,
+            'nilai' => 40,
         ]);
         \App\BobotAwal::create([
             'gap_a' => 0,
@@ -76,6 +76,81 @@ class DatabaseSeeder extends Seeder
             'nilai' => 5,
             'jenisbobot_id' => 2,
             'keterangan' => "Tidak ada selisih (Kopetensi sesuai yang dibutuhkan)",
+        ]);
+
+        \App\Kriteria::create([
+            'penilaian_id' => 1,
+            'jenisbobot_id' => 1,
+            'nilai' => 5,
+            'keterangan' => "Nihhon",
+        ]);
+        \App\Kriteria::create([
+            'penilaian_id' => 1,
+            'jenisbobot_id' => 1,
+            'nilai' => 2,
+            'keterangan' => "Sanbon",
+        ]);
+        \App\Kriteria::create([
+            'penilaian_id' => 1,
+            'jenisbobot_id' => 2,
+            'nilai' => 1,
+            'keterangan' => "Ippon",
+        ]);
+        \App\Kriteria::create([
+            'penilaian_id' => 2,
+            'jenisbobot_id' => 1,
+            'nilai' => 80,
+            'keterangan' => "Kinerja Atlet",
+        ]);
+        \App\Kriteria::create([
+            'penilaian_id' => 2,
+            'jenisbobot_id' => 2,
+            'nilai' => 80,
+            'keterangan' => "Kinerja Atlet",
+        ]);
+        \App\Kriteria::create([
+            'penilaian_id' => 2,
+            'jenisbobot_id' => 1,
+            'nilai' => 70,
+            'keterangan' => "Atlet Beregu",
+        ]);
+        \App\Kriteria::create([
+            'penilaian_id' => 3,
+            'jenisbobot_id' => 1,
+            'nilai' => 80,
+            'keterangan' => "Kinerja Kata",
+        ]);
+        \App\Kriteria::create([
+            'penilaian_id' => 3,
+            'jenisbobot_id' => 1,
+            'nilai' => 70,
+            'keterangan' => "Kinerja Atlet",
+        ]);
+        \App\Kriteria::create([
+            'penilaian_id' => 3,
+            'jenisbobot_id' => 2,
+            'nilai' => 80,
+            'keterangan' => "Kinerja Bunkai",
+        ]);
+        \App\Atlet::create([
+            'nama' => "User D",
+            'umur' => 12,
+            'kelas' => 2,
+        ]);
+        \App\Atlet::create([
+            'nama' => "User C",
+            'umur' => 12,
+            'kelas' => 2,
+        ]);
+        \App\Atlet::create([
+            'nama' => "User B",
+            'umur' => 12,
+            'kelas' => 2,
+        ]);
+        \App\Atlet::create([
+            'nama' => "User A",
+            'umur' => 12,
+            'kelas' => 2,
         ]);
     }
 }

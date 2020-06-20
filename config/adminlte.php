@@ -252,6 +252,11 @@ return [
             'icon'    => 'fas fa-fw fa-file',
         ],
         [
+            'text' => 'Atlet',
+            'route'  => 'atlet.index',
+            'icon'    => 'fas fa-fw fa-file',
+        ],
+        [
             'text'        => 'Penilaian',
             'route'         => 'penilaian.index',
             'icon'        => 'fas fa-fw fa-file',
@@ -387,7 +392,7 @@ return [
         ],
         [
             'name' => 'Chartjs',
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',

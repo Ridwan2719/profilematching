@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Periode')
+@section('title', 'Master Atlet')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Periode</h1>
+<h1 class="m-0 text-dark">Atlet</h1>
 @stop
 
 @section('content')
@@ -19,11 +19,11 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Data Periode</h3>
+                    Data Atlet</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('periode.create') }}" class="btn btn-primary  btn-sm btn-flat">
-                        Tambah baru Periode
+                    <a href="{{ route('atlet.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                        Tambah baru Atlet
                     </a>
                 </div>
             </div>
@@ -33,10 +33,11 @@
                 <table class="table table-striped" id="table">
                     <thead>
                         <tr>
-                            <th witdh="10%">No</th>
-                            <th witdh="40%">Periode</th>
-                            <th witdh="40%">Status</th>
-                            <th witdh="10%">Aksi</th>
+                            <th witdh="5%">No</th>
+                            <th witdh=50%">Nama</th>
+                            <th witdh="20%">Kelas</th>
+                            <th witdh="20%">Umur</th>
+                            <th witdh="10%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -174,7 +175,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    'url': "{!! route('tablePeriode') !!}",
+                    'url': "{!! route('tableAtlet') !!}",
                     "type": "GET"
                 },
                 columns: [{
@@ -184,17 +185,24 @@
                         searchable: false
                     },
                     {
-                        data: 'keterangan',
-                        name: 'keterangan'
+                        data: 'nama',
+                        name: 'nama'
                     },
                     {
-                        data: 'stausName',
-                        name: 'status'
+                        data: 'kelas',
+                        name: 'kelas'
                     },
+
+                    {
+                        data: 'umur',
+                        name: 'umur'
+                    },
+
                     {
                         data: 'action',
                         name: 'action'
                     },
+
                 ]
             });
 

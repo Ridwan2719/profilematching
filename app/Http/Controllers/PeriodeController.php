@@ -28,6 +28,10 @@ class PeriodeController extends Controller
                     // 'url_detail' => route('penilaian.show', $q->id),
                 ]);
             })
+            ->addColumn('stausName', function ($q) {
+                //Kemudian kita menambahkan kolom baru , yaitu "action"
+                return  $q->status == 0 ? "Aktif" : "Non-Aktif";
+            })
             ->addIndexColumn()
             // ->rawColumns(['other-columns'])
             ->make(true);
@@ -90,7 +94,7 @@ class PeriodeController extends Controller
     public function edit(Periode $periode)
     {
         //
-        return view("periode.edit",compact('periode'));
+        return view("periode.edit", compact('periode'));
     }
 
     /**
