@@ -78,8 +78,12 @@ class DataAwalController extends Controller
     }
     public function hitunggap()
     {
-         $dataNilai = \App\DataAwal::where("periode_id", 1)->where("penilaian_id", 1)->get()->toArray();
-         $hapus = \App\GAP::where("periode_id", 1)->where("penilaian_id", 1)->delete();
+
+        $penilaianID = 1;
+        $periodeID = 1;
+        $dataNilai = \App\DataAwal::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->get();
+        \App\GAP::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
+        \App\NormaisasiBobot::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
         //  $hapus->delete();
         //  return \App\Kriteria::where("id",$dataNilai[1])->first()->nilai;
         foreach ($dataNilai as $a => $b) {
@@ -88,14 +92,21 @@ class DataAwalController extends Controller
             $gap->periode_id = $b['periode_id'];
             $gap->kriteria_id = $b['kriteria_id'];
             $gap->penilaian_id = $b['penilaian_id'];
-            $gap->nilai = $b['nilai'] - \App\Kriteria::where('id',$b['kriteria_id'])->first()->nilai;
+            $gap->nilai = $b['nilai'] - \App\Kriteria::where('id', $b['kriteria_id'])->first()->nilai;
             $gap->save();
         }
-        return \App\GAP::all();
-    }
-    public function hitungNormalisasi(){
-        $bobotAwal = DB::select("INSERT INTO `normaisasi_bobots`(  `atlet_id`, `periode_id`, `penilaian_id`, `kriteria_id`, `nilai`)SELECT g_a_p_s.atlet_id, g_a_p_s.periode_id, g_a_p_s.penilaian_id, g_a_p_s.kriteria_id, bobot_awals.nilai  FROM `g_a_p_s` JOIN kriterias ON kriterias.penilaian_id = g_a_p_s.kriteria_id JOIN penilaians ON penilaians.id = g_a_p_s.penilaian_id JOIN bobot_awals ON bobot_awals.jenisbobot_id = kriterias.jenisbobot_id WHERE g_a_p_s.periode_id = 1 AND g_a_p_s.penilaian_id = 1 AND g_a_p_s.nilai  BETWEEN bobot_awals.gap_a AND bobot_awals.gap_b ");
+        DB::select("INSERT INTO `normaisasi_bobots`(`penilaian_id`, `atlet_id`, `periode_id`, `kriteria_id`, `nilai`,`bobot_id`) SELECT g_a_p_s.penilaian_id, g_a_p_s.atlet_id, g_a_p_s.periode_id, g_a_p_s.kriteria_id, bobot_awals.nilai, kriterias.jenisbobot_id FROM `g_a_p_s` JOIN penilaians ON penilaians.id = g_a_p_s.penilaian_id JOIN jenisbobots ON jenisbobots.id = penilaians.bobot JOIN bobot_awals ON bobot_awals.jenisbobot_id = jenisbobots.id JOIN kriterias on kriterias.id = g_a_p_s.kriteria_id  WHERE g_a_p_s.penilaian_id=" . $penilaianID . " and g_a_p_s.periode_id=" . $periodeID . " and g_a_p_s.nilai BETWEEN bobot_awals.gap_b AND bobot_awals.gap_b");
+        //DB::select("INSERT INTO `coresecondaries`( `penilaian_id`, `periode_id`, `atlet_id`, `core`, `second`)SELECT normaisasi_bobots.penilaian_id, normaisasi_bobots.periode_id, normaisasi_bobots.atlet_id, SUM(IF(kriterias.jenisbobot_id = 1, normaisasi_bobots.nilai, 0)) AS Core, SUM(IF(kriterias.jenisbobot_id = 2, normaisasi_bobots.nilai, 0)) AS Secondary FROM `normaisasi_bobots` JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN jenis_kriterias ON jenis_kriterias.id = kriterias.jenisbobot_id WHERE normaisasi_bobots.penilaian_id=" . $penilaianID . " and normaisasi_bobots.periode_id=" . $periodeID);
+        //DB::select("INSERT INTO `hasils`(`atlet_id`, `penilaian_id`, `nilai`, `periode_id`)SELECT coresecondaries.atlet_id, coresecondaries.penilaian_id,((coresecondaries.core*60/100)/2) + ((coresecondaries.second*40/100)/2) AS Hasil, coresecondaries.periode_id Hasil FROM `coresecondaries` WHERE coresecondaries.periode_id = " . $penilaianID . " AND coresecondaries.penilaian_id = " . $penilaianID);
+        $data = \App\NormaisasiBobot::join('kriterias', "kriterias.id", "=", 'kriteria_id')->join('jenis_kriterias', "kriterias.jenisbobot_id", "=", 'jenis_kriterias.id')->groupBy('bobot_id', 'atlet_id')
+            ->selectRaw('*, count(normaisasi_bobots.bobot_id) as count,sum(normaisasi_bobots.nilai) as sum,((sum(normaisasi_bobots.nilai)*jenis_kriterias.nilai/100)/count(normaisasi_bobots.bobot_id)) AS Hasil')
+            ->get();
 
+        dd($data);
+    }
+    public function hitungNormalisasi()
+    {
+        $bobotAwal = "";
         return $bobotAwal;
     }
     /**

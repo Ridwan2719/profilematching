@@ -239,5 +239,47 @@ class DatabaseSeeder extends Seeder
             'keterangan' => "20/06/2020",
             'status' => "Aktif",
         ]);
+        \App\DataAwal::create([
+            'atlet_id' => 1,
+            'periode_id' => 1,
+            'kriteria_id' => 2,
+            'penilaian_id' => 1,
+            'nilai' => 3,
+        ]);
+        \App\DataAwal::create([
+            'atlet_id' => 1,
+            'periode_id' => 1,
+            'kriteria_id' => 1,
+            'penilaian_id' => 1,
+            'nilai' => 2,
+        ]);
+        \App\DataAwal::create([
+            'atlet_id' => 1,
+            'periode_id' => 1,
+            'kriteria_id' => 3,
+            'penilaian_id' => 1,
+            'nilai' => 1,
+        ]);
+        \App\DataAwal::create([
+            'atlet_id' => 2,
+            'periode_id' => 1,
+            'kriteria_id' => 2,
+            'penilaian_id' => 1,
+            'nilai' => 2,
+        ]);
+        \App\DataAwal::create([
+            'atlet_id' => 2,
+            'periode_id' => 1,
+            'kriteria_id' => 1,
+            'penilaian_id' => 1,
+            'nilai' => 3,
+        ]);
+        \App\DataAwal::create([
+            'atlet_id' => 2,
+            'periode_id' => 1,
+            'kriteria_id' => 3,
+            'penilaian_id' => 1,
+            'nilai' => 1,
+        ]);
     }
 }

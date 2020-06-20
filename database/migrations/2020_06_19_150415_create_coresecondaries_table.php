@@ -16,6 +16,7 @@ class CreateCoresecondariesTable extends Migration
         Schema::create('coresecondaries', function (Blueprint $table) {
             $table->id();
             $table->string("penilaian_id");
+            $table->string("periode_id");
             $table->string("atlet_id");
             $table->string("core");
             $table->string("second");
