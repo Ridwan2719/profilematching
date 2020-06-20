@@ -18,8 +18,8 @@ class CreateCoresecondariesTable extends Migration
             $table->string("penilaian_id");
             $table->string("periode_id");
             $table->string("atlet_id");
-            $table->string("core");
-            $table->string("second");
+            $table->string("jenisbobot_id");
+            $table->string("hasil");
             $table->timestamps();
         });
     }

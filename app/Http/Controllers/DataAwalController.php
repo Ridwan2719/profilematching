@@ -84,6 +84,8 @@ class DataAwalController extends Controller
         $dataNilai = \App\DataAwal::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->get();
         \App\GAP::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
         \App\NormaisasiBobot::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
+        \App\Coresecondary::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
+        \App\Hasil::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
         //  $hapus->delete();
         //  return \App\Kriteria::where("id",$dataNilai[1])->first()->nilai;
         foreach ($dataNilai as $a => $b) {
@@ -98,11 +100,39 @@ class DataAwalController extends Controller
         DB::select("INSERT INTO `normaisasi_bobots`(`penilaian_id`, `atlet_id`, `periode_id`, `kriteria_id`, `nilai`,`bobot_id`) SELECT g_a_p_s.penilaian_id, g_a_p_s.atlet_id, g_a_p_s.periode_id, g_a_p_s.kriteria_id, bobot_awals.nilai, kriterias.jenisbobot_id FROM `g_a_p_s` JOIN penilaians ON penilaians.id = g_a_p_s.penilaian_id JOIN jenisbobots ON jenisbobots.id = penilaians.bobot JOIN bobot_awals ON bobot_awals.jenisbobot_id = jenisbobots.id JOIN kriterias on kriterias.id = g_a_p_s.kriteria_id  WHERE g_a_p_s.penilaian_id=" . $penilaianID . " and g_a_p_s.periode_id=" . $periodeID . " and g_a_p_s.nilai BETWEEN bobot_awals.gap_b AND bobot_awals.gap_b");
         //DB::select("INSERT INTO `coresecondaries`( `penilaian_id`, `periode_id`, `atlet_id`, `core`, `second`)SELECT normaisasi_bobots.penilaian_id, normaisasi_bobots.periode_id, normaisasi_bobots.atlet_id, SUM(IF(kriterias.jenisbobot_id = 1, normaisasi_bobots.nilai, 0)) AS Core, SUM(IF(kriterias.jenisbobot_id = 2, normaisasi_bobots.nilai, 0)) AS Secondary FROM `normaisasi_bobots` JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN jenis_kriterias ON jenis_kriterias.id = kriterias.jenisbobot_id WHERE normaisasi_bobots.penilaian_id=" . $penilaianID . " and normaisasi_bobots.periode_id=" . $periodeID);
         //DB::select("INSERT INTO `hasils`(`atlet_id`, `penilaian_id`, `nilai`, `periode_id`)SELECT coresecondaries.atlet_id, coresecondaries.penilaian_id,((coresecondaries.core*60/100)/2) + ((coresecondaries.second*40/100)/2) AS Hasil, coresecondaries.periode_id Hasil FROM `coresecondaries` WHERE coresecondaries.periode_id = " . $penilaianID . " AND coresecondaries.penilaian_id = " . $penilaianID);
-        $data = \App\NormaisasiBobot::join('kriterias', "kriterias.id", "=", 'kriteria_id')->join('jenis_kriterias', "kriterias.jenisbobot_id", "=", 'jenis_kriterias.id')->groupBy('bobot_id', 'atlet_id')
+        $data = \App\NormaisasiBobot::where("normaisasi_bobots.periode_id", $periodeID)->where("normaisasi_bobots.penilaian_id", $penilaianID)
+            ->join('kriterias', "kriterias.id", "=", 'kriteria_id')->join('jenis_kriterias', "kriterias.jenisbobot_id", "=", 'jenis_kriterias.id')->groupBy('bobot_id', 'atlet_id')
             ->selectRaw('*, count(normaisasi_bobots.bobot_id) as count,sum(normaisasi_bobots.nilai) as sum,((sum(normaisasi_bobots.nilai)*jenis_kriterias.nilai/100)/count(normaisasi_bobots.bobot_id)) AS Hasil')
             ->get();
-
-        dd($data);
+        foreach ($data as $a => $b) {
+            $core = new \App\Coresecondary();
+            $core->penilaian_id = $b['penilaian_id'];
+            $core->periode_id = $b['periode_id'];
+            $core->atlet_id = $b['atlet_id'];
+            $core->jenisbobot_id = $b['jenisbobot_id'];
+            $core->hasil = $b['Hasil'];
+            $core->save();
+        }
+        $data = \App\Coresecondary::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->groupBy('atlet_id')
+            ->selectRaw('*,sum(coresecondaries.hasil) as sum')
+            ->get();
+        foreach ($data as $a => $b) {
+            $hasil = new \App\Hasil();
+            $hasil->penilaian_id = $b['penilaian_id'];
+            $hasil->periode_id = $b['periode_id'];
+            $hasil->atlet_id = $b['atlet_id'];
+            $hasil->nilai = $b['sum'];
+            $hasil->save();
+        }
+        // $collection = DB::select('SELECT *,
+        // -- IF (@score=s.nilai, @rank:=@rank, @rank:=@rank+1) rank,
+        // -- @score:=s.nilai score
+        // -- FROM hasils s,
+        // -- (SELECT @score:=0, @rank:=0) r
+        // -- -- ORDER BY nilai DESC');
+        // $data       = $collection->all();
+$collection = \DB::select("SELECT hasils.atlet_id, hasils.penilaian_id, hasils.periode_id, hasils.nilai, RANK() OVER(ORDER BY hasils.nilai DESC) AS 'Ranking'  FROM `hasils`");
+        return $collection;
     }
     public function hitungNormalisasi()
     {
