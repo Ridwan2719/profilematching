@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Penilaian')
+@section('title', 'Master Kreteria')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Penilaian</h1>
+<h1 class="m-0 text-dark">Kreteria</h1>
 @stop
 
 @section('content')
@@ -15,15 +15,15 @@
             <strong>{{ $message }}</strong>
         </div>
         @endif
-        
+
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Data Penilaian</h3>
+                    Data Kreteria</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('penilaian.create') }}" class="btn btn-primary  btn-sm btn-flat">
-                        Tambah baru Penilaian
+                    <a href="{{ route('kriteria.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                        Tambah baru Kreteria
                     </a>
                 </div>
             </div>
@@ -33,10 +33,11 @@
                 <table class="table table-striped" id="table">
                     <thead>
                         <tr>
-                            <th witdh="10%">No</th>
-                            <th witdh="40%">Penilaian</th>
-                            <th witdh="40%">Jenis Bobot</th>
-                            <th witdh="10%">Aksi</th>
+                            <th witdh="5%">No</th>
+                            <th witdh="30%">Penilaian</th>
+                            <th witdh="40%">Keterangan</th>
+                            <th witdh="20%">Jenis Kreteria</th>
+                            <th witdh="15%">Nilai</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -174,7 +175,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    'url': "{!! route('datatablepenilaian') !!}",
+                    'url': "{!! route('tableKriteria') !!}",
                     "type": "GET"
                 },
                 columns: [{
@@ -184,17 +185,24 @@
                         searchable: false
                     },
                     {
+                        data: 'penilaian.keterangan',
+                        name: 'penilaian.keterangan'
+                    },
+                    {
                         data: 'keterangan',
                         name: 'keterangan'
                     },
+
                     {
-                        data: 'jenisbobot.keterangan',
-                        name: 'jenisbobot.keterangan'
+                        data: 'jenis_kriteria.keterangan',
+                        name: 'jenis_kriteria.keterangan'
                     },
+
                     {
-                        data: 'action',
-                        name: 'action'
+                        data: 'nilai',
+                        name: 'nilai'
                     },
+
                 ]
             });
 

@@ -12,9 +12,30 @@ class PeriodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dataTables()
+    {
+        $query = \App\Periode::orderBy('id', 'desc');
+        //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
+        return \Yajra\Datatables\Datatables::of($query)
+            //$query di masukkan kedalam Datatables
+            ->addColumn('action', function ($q) {
+                //Kemudian kita menambahkan kolom baru , yaitu "action"
+                return view('links', [
+                    //Kemudian dioper ke file links.blade.php
+                    'model'      => $q,
+                    'url_edit'   => route('periode.edit', $q->id),
+                    // 'url_hapus'  => route('bobot.destroy', $q->id),
+                    // 'url_detail' => route('penilaian.show', $q->id),
+                ]);
+            })
+            ->addIndexColumn()
+            // ->rawColumns(['other-columns'])
+            ->make(true);
+    }
     public function index()
     {
         //
+        return view('periode.index');
     }
 
     /**
@@ -25,6 +46,7 @@ class PeriodeController extends Controller
     public function create()
     {
         //
+        return view('periode.create');
     }
 
     /**
@@ -36,6 +58,16 @@ class PeriodeController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'keterangan' => 'required',
+            'status' => 'required',
+        ]);
+        $penilaian = new \App\Periode;
+        $penilaian->keterangan = $request->input('keterangan');
+        $penilaian->status = $request->input('status');
+        $penilaian->save();
+        return  redirect()->route('periode.index')
+            ->with('success', 'Berhasil Di Simpan');
     }
 
     /**
@@ -58,6 +90,7 @@ class PeriodeController extends Controller
     public function edit(Periode $periode)
     {
         //
+        return view("periode.edit",compact('periode'));
     }
 
     /**
@@ -70,6 +103,16 @@ class PeriodeController extends Controller
     public function update(Request $request, Periode $periode)
     {
         //
+        $validatedData = $request->validate([
+            'keterangan' => 'required',
+            'status' => 'required',
+        ]);
+        $penilaian = \App\Periode::find($periode->id);
+        $penilaian->keterangan = $request->input('keterangan');
+        $penilaian->status = $request->input('status');
+        $penilaian->save();
+        return  redirect()->route('periode.index')
+            ->with('success', 'Berhasil Di Update');
     }
 
     /**

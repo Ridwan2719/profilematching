@@ -23,11 +23,31 @@ class DatabaseSeeder extends Seeder
             'email' => "admin@gmail.com",
             'password' => Hash::make("admin"),
         ]);
+        \App\Penilaian::create([
+            'keterangan' => "Atlet Kumite",
+            'bobot' => 1,
+        ]);
+        \App\Penilaian::create([
+            'keterangan' => "Atlet Kata",
+            'bobot' => 2,
+        ]);
+        \App\Penilaian::create([
+            'keterangan' => "Atlet Beregu",
+            'bobot' => 2,
+        ]);
         \App\Jenisbobot::create([
             'keterangan' => "Bobot A",
         ]);
         \App\Jenisbobot::create([
             'keterangan' => "Bobot B",
+        ]);
+        \App\JenisKriteria::create([
+            'keterangan' => "Core Factor",
+            'nilai'=>60,
+        ]);
+        \App\JenisKriteria::create([
+            'keterangan' => "Secondary Factor",
+            'nilai'=>40,
         ]);
         \App\BobotAwal::create([
             'gap_a' => 0,

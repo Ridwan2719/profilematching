@@ -14,7 +14,7 @@ class PenilaianController extends Controller
      */
     public function dataTables()
     {
-        $query = \App\Penilaian::orderBy('id', 'desc');
+        $query = \App\Penilaian::with('Jenisbobot')->orderBy('id', 'desc');
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -63,6 +63,7 @@ class PenilaianController extends Controller
         ]);
         $penilaian = new \App\Penilaian;
         $penilaian->keterangan = $request->input('keterangan');
+        $penilaian->bobot = $request->input('bobot');
         $penilaian->save();
         return  redirect()->route('penilaian.index')
             ->with('success', 'Berhasil Di Simpan');
@@ -107,6 +108,7 @@ class PenilaianController extends Controller
         ]);
         $penilaian = \App\Penilaian::find($penilaian->id);
         $penilaian->keterangan = $request->input('keterangan');
+        $penilaian->bobot = $request->input('bobot');
         $penilaian->save();
         return  redirect()->route('penilaian.index')
             ->with('success', 'Berhasil Di Simpan');

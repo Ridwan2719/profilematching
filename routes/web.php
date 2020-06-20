@@ -39,9 +39,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('bobot', 'BobotAwalController');
         Route::get('tableBobot', 'BobotAwalController@dataTables')->name('tableBobot');
 
-
+        Route::resource('jeniskriteria', 'JenisKriteriaController');
+        Route::get('tablejeniskriteria', 'JenisKriteriaController@dataTables')->name('tablejeniskriteria');
 
         Route::resource('kriteria', 'KriteriaController');
         Route::get('tableKriteria', 'KriteriaController@dataTables')->name('tableKriteria');
+
+        Route::resource('periode', 'PeriodeController');
+        Route::get('tablePeriode', 'PeriodeController@dataTables')->name('tablePeriode');
     });
 });

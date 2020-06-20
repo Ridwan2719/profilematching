@@ -242,12 +242,23 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text' => 'Periode',
+            'route'  => 'periode.index',
+            'icon'    => 'fas fa-fw fa-file',
+        ],
+        [
+            'text' => 'Kriteria',
+            'route'  => 'kriteria.index',
+            'icon'    => 'fas fa-fw fa-file',
+        ],
+        [
             'text'        => 'Penilaian',
             'route'         => 'penilaian.index',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-file',
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],
+        
         [
             'text'    => 'Master',
             'icon'    => 'fas fa-fw fa-share',
@@ -256,18 +267,17 @@ return [
                 [
                     'text' => 'Jenis Bobot',
                     'route'  => 'jenisbobot.index',
-                    'icon'    => 'fas fa-fw fa-share',
+                    'icon'    => 'far fa-fw fa-file',
                 ],
                 [
                     'text' => 'Bobot',
                     'route'  => 'bobot.index',
-                    'icon'    => 'fas fa-fw fa-share',
+                    'icon'    => 'far fa-fw fa-file',
                 ],
                 [
-                    'text' => 'Kriteria',
-                    'route'  => 'kriteria.index',
-                    'icon'    => 'fas fa-fw fa-share',
-
+                    'text' => 'Jenis Kriteria',
+                    'route'  => 'jeniskriteria.index',
+                    'icon'    => 'far fa-fw fa-file',
                 ],
                 
             ],

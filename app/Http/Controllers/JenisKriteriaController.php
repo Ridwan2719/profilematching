@@ -12,9 +12,30 @@ class JenisKriteriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dataTables()
+    {
+        $query = \App\JenisKriteria::orderBy('id', 'desc');
+        //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
+        return \Yajra\Datatables\Datatables::of($query)
+            //$query di masukkan kedalam Datatables
+            // ->addColumn('action', function ($q) {
+            //Kemudian kita menambahkan kolom baru , yaitu "action"
+            // return view('links', [
+            //Kemudian dioper ke file links.blade.php
+            // 'model'      => $q,
+            // 'url_edit'   => route('penilaian.edit', $q->id),
+            // 'url_hapus'  => route('bobot.destroy', $q->id),
+            // 'url_detail' => route('penilaian.show', $q->id),
+            // ]);
+            // })
+            ->addIndexColumn()
+            // ->rawColumns(['other-columns'])
+            ->make(true);
+    }
     public function index()
     {
         //
+        return view('jeniskreteria.index');
     }
 
     /**

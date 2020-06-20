@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Penilaian')
+@section('title', 'Periode')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Penilaian</h1>
+<h1 class="m-0 text-dark">Periode</h1>
 @stop
 
 @section('content')
@@ -15,15 +15,15 @@
             <strong>{{ $message }}</strong>
         </div>
         @endif
-        
+
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Data Penilaian</h3>
+                    Data Periode</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('penilaian.create') }}" class="btn btn-primary  btn-sm btn-flat">
-                        Tambah baru Penilaian
+                    <a href="{{ route('periode.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                        Tambah baru Periode
                     </a>
                 </div>
             </div>
@@ -34,8 +34,8 @@
                     <thead>
                         <tr>
                             <th witdh="10%">No</th>
-                            <th witdh="40%">Penilaian</th>
-                            <th witdh="40%">Jenis Bobot</th>
+                            <th witdh="40%">Periode</th>
+                            <th witdh="40%">Status</th>
                             <th witdh="10%">Aksi</th>
                         </tr>
                     </thead>
@@ -174,7 +174,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    'url': "{!! route('datatablepenilaian') !!}",
+                    'url': "{!! route('tablePeriode') !!}",
                     "type": "GET"
                 },
                 columns: [{
@@ -188,8 +188,8 @@
                         name: 'keterangan'
                     },
                     {
-                        data: 'jenisbobot.keterangan',
-                        name: 'jenisbobot.keterangan'
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'action',
