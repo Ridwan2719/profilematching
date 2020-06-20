@@ -13,14 +13,14 @@ class CreateSubKriteriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_kriterias', function (Blueprint $table) {
-            $table->id();
-            $table->string('keterangan');
-            $table->string('kriteria_id');
-            $table->string('nilai');
+        // Schema::create('sub_kriterias', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('keterangan');
+        //     $table->string('kriteria_id');
+        //     $table->string('nilai');
 
-            $table->timestamps();
-        });
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateSubKriteriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_kriterias');
+        // Schema::dropIfExists('sub_kriterias');
     }
 }

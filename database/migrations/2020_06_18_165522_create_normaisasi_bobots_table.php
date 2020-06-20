@@ -19,7 +19,7 @@ class CreateNormaisasiBobotsTable extends Migration
             $table->string('atlet_id');
             $table->string('periode_id');
             $table->string('kriteria_id');
-            $table->string('subkriteria_id');
+            // $table->string('subkriteria_id');
             $table->string('nilai');
             $table->timestamps();
         });

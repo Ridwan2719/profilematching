@@ -17,7 +17,7 @@ class CreateGAPSTable extends Migration
             $table->id();
             $table->string('altet_id');
             $table->string('kriteria_id');
-            $table->string('subkriteria_id');
+            // $table->string('subkriteria_id');
             $table->string('nilai');
             $table->string('periode_id');
             $table->string('penilaian_id');
