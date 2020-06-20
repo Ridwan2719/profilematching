@@ -88,13 +88,13 @@ class DataAwalController extends Controller
             $gap->periode_id = $b['periode_id'];
             $gap->kriteria_id = $b['kriteria_id'];
             $gap->penilaian_id = $b['penilaian_id'];
-            $gap->nilai = $b['nilai'] - \App\Kriteria::find($b['kriteria_id'])->first()->nilai;
+            $gap->nilai = $b['nilai'] - \App\Kriteria::where('id',$b['kriteria_id'])->first()->nilai;
             $gap->save();
         }
         return \App\GAP::all();
     }
     public function hitungNormalisasi(){
-        $bobotAwal = DB::select("INSERT INTO `normaisasi_bobots`(  `atlet_id`, `periode_id`, `penilaian_id`, `kriteria_id`, `nilai`)SELECT g_a_p_s.atlet_id, g_a_p_s.periode_id, g_a_p_s.penilaian_id, g_a_p_s.kriteria_id, bobot_awals.nilai  FROM `g_a_p_s` JOIN kriterias ON kriterias.penilaian_id = g_a_p_s.kriteria_id JOIN penilaians ON penilaians.id = g_a_p_s.penilaian_id JOIN bobot_awals ON bobot_awals.jenisbobot_id = kriterias.jenisbobot_id WHERE g_a_p_s.periode_id = 1 AND g_a_p_s.penilaian_id = 1 AND g_a_p_s.nilai  BETWEEN bobot_awals.gap_a AND bobot_awals.gap_b  ORDER BY g_a_p_s.atlet_id LIMIT 0,1");
+        $bobotAwal = DB::select("INSERT INTO `normaisasi_bobots`(  `atlet_id`, `periode_id`, `penilaian_id`, `kriteria_id`, `nilai`)SELECT g_a_p_s.atlet_id, g_a_p_s.periode_id, g_a_p_s.penilaian_id, g_a_p_s.kriteria_id, bobot_awals.nilai  FROM `g_a_p_s` JOIN kriterias ON kriterias.penilaian_id = g_a_p_s.kriteria_id JOIN penilaians ON penilaians.id = g_a_p_s.penilaian_id JOIN bobot_awals ON bobot_awals.jenisbobot_id = kriterias.jenisbobot_id WHERE g_a_p_s.periode_id = 1 AND g_a_p_s.penilaian_id = 1 AND g_a_p_s.nilai  BETWEEN bobot_awals.gap_a AND bobot_awals.gap_b ");
 
         return $bobotAwal;
     }
