@@ -44,11 +44,17 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('kriteria', 'KriteriaController');
         Route::get('tableKriteria', 'KriteriaController@dataTables')->name('tableKriteria');
+        Route::POST('get/data/kriteria', 'KriteriaController@dataDropdown')->name('dataDropdown');
 
         Route::resource('periode', 'PeriodeController');
         Route::get('tablePeriode', 'PeriodeController@dataTables')->name('tablePeriode');
-       
+
         Route::resource('atlet', 'AtletController');
         Route::get('tableAtlet', 'AtletController@dataTables')->name('tableAtlet');
+        
+        Route::resource('hitung', 'DataAwalController');
+        Route::get('tableHitung', 'DataAwalController@dataTables')->name('tableHitung');
+        Route::get('get/data/dataTableInsert/{id}', 'DataAwalController@dataAwalTable')->name('dataTableInsert');
+
     });
 });

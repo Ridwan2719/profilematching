@@ -263,6 +263,13 @@ return [
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],
+        [
+            'text'        => 'Hitung',
+            'route'         => 'hitung.index',
+            'icon'        => 'fas fa-fw fa-file',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
         
         [
             'text'    => 'Master',

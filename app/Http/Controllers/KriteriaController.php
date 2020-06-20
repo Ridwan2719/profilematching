@@ -32,12 +32,21 @@ class KriteriaController extends Controller
             // ->rawColumns(['other-columns'])
             ->make(true);
     }
+    
     public function index()
     {
         //
         return view('kriteria.index');
     }
-
+    public function dataDropdown(Request $request)
+    {
+        $data = \App\Kriteria::where("penilaian_id",$request->id)->get();
+        $data2 = "";
+        foreach($data as $a=>$b){
+            $data2 .= "<option value='".$b['id']."'>".$b["keterangan"]."</option>";
+        }
+        return $this->sendResponse($data2, 'successfully.');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -55,6 +64,7 @@ class KriteriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+   
     public function store(Request $request)
     {
         //

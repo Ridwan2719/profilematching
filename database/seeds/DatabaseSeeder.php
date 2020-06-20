@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
         \App\Kriteria::create([
             'penilaian_id' => 1,
             'jenisbobot_id' => 1,
-            'nilai' => 5,
+            'nilai' => 3,
             'keterangan' => "Nihhon",
         ]);
         \App\Kriteria::create([
@@ -151,6 +151,10 @@ class DatabaseSeeder extends Seeder
             'nama' => "User A",
             'umur' => 12,
             'kelas' => 2,
+        ]);
+        \App\Periode::create([
+            'keterangan' => "20/06/2020",
+            'status' => "Aktif",
         ]);
     }
 }

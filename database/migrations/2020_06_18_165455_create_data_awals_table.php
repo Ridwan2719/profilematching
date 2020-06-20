@@ -15,8 +15,8 @@ class CreateDataAwalsTable extends Migration
     {
         Schema::create('data_awals', function (Blueprint $table) {
             $table->id();
-            $table->string('altet_id');
-            $table->string('subkriteria_id');
+            $table->string('atlet_id');
+            $table->string('periode_id');
             $table->string('kriteria_id');
             $table->string('penilaian_id');
             $table->string('nilai');
