@@ -15,7 +15,7 @@ class CreateGAPSTable extends Migration
     {
         Schema::create('g_a_p_s', function (Blueprint $table) {
             $table->id();
-            $table->string('altet_id');
+            $table->string('atlet_id');
             $table->string('kriteria_id');
             // $table->string('subkriteria_id');
             $table->string('nilai');

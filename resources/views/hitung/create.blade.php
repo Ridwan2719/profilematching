@@ -52,6 +52,7 @@
                         <div class="form-group">
                             <label for="nama" class="col-12 col-form-label">Atlet</label>
                             <div class="col-12">
+                                
                                 {!! Form::select('atlet_id', \App\Atlet::all()->pluck('nama', 'id')->toArray(), null,['class'=>'select2 form-control atlet']) !!}
                             </div>
                         </div>
@@ -68,7 +69,7 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <label for="nama" class="col-12 col-form-label">Pukulan</label>
+                            <label for="nama" class="col-12 col-form-label">Nilai</label>
                             <div class="col-12">
                                 <input class="form-control nilaiInput" type="number" value="" name="nilai" id="dataNilai" />
                             </div>
@@ -240,10 +241,8 @@
         $(".penilaian").change(function() {
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
-            // alert("Selected Text: " + selectedText + " Value: " + selectedValue);
             const data = {};
             data["id"] = $(this).val();
-
             axios({
                 url: "{{route('dataDropdown')}}",
                 credentials: true,
