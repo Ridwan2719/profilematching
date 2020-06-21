@@ -54,10 +54,15 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('atlet', 'AtletController');
         Route::get('tableAtlet', 'AtletController@dataTables')->name('tableAtlet');
-        
+
+        Route::resource('hasil', 'HasilController');
+        Route::get('tableHasil', 'HasilController@dataTables')->name('tableHasil');
+        Route::get('tableHasildetail/{periode}/{penilaian}', 'HasilController@dataTables2')->name('tableHasildetail');
+        Route::get('detailHasil/{periode}/{penilaian}', 'DataAwalController@hitunggap')->name('detailHasil');
+
         Route::resource('hitung', 'DataAwalController');
         Route::get('tableHitung', 'DataAwalController@dataTables')->name('tableHitung');
-        Route::get('get/data/dataTableInsert/{id}', 'DataAwalController@dataAwalTable')->name('dataTableInsert');
-
+        Route::get('deletedatawal/{id}', 'DataAwalController@destroy')->name('deletedatawal');
+        Route::get('dataTableInsert/{periode}/{penilaian}', 'DataAwalController@dataAwalTable')->name('dataTableInsert');
     });
 });

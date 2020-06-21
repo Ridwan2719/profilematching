@@ -24,4 +24,5 @@ class Hasil extends Model
     {
         return $this->newQuery()->where('number', '>=', $this->number)->count();
     }
+    
 }

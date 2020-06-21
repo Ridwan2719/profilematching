@@ -37,13 +37,13 @@
                     <div class="form-group row col-6">
                         <label for="nama" class="col-2 col-form-label">Periode</label>
                         <div class="col-6">
-                            {!! Form::select('periode_id', \App\Periode::all()->pluck('keterangan', 'id')->toArray(), null,['class'=>'select2 form-control periode']) !!}
+                            {!! Form::select('periode_id', \App\Periode::all()->pluck('keterangan', 'id')->toArray(), null,['class'=>'select2 form-control periode datarefresh']) !!}
                         </div>
                     </div>
                     <div class="form-group row  col-6">
                         <label for="nama" class="col-2 col-form-label">Penilaian</label>
                         <div class="col-6">
-                            {!! Form::select('penilaian_id', \App\Penilaian::all()->pluck('keterangan', 'id')->toArray(), null,['class'=>'select2 form-control penilaian']) !!}
+                            {!! Form::select('penilaian_id', \App\Penilaian::all()->pluck('keterangan', 'id')->toArray(), null,['class'=>'select2 form-control penilaian datarefresh']) !!}
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,6 @@
                         <div class="form-group">
                             <label for="nama" class="col-12 col-form-label">Atlet</label>
                             <div class="col-12">
-                                
                                 {!! Form::select('atlet_id', \App\Atlet::all()->pluck('nama', 'id')->toArray(), null,['class'=>'select2 form-control atlet']) !!}
                             </div>
                         </div>
@@ -115,45 +114,54 @@
 <script type="text/javascript">
     $(function() {
         var dataTemp = [];
-        var periodes = $('.periode').val();
-
-        table =
-            $('#table').DataTable({
-                //server-side
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    'url': "../get/data/dataTableInsert/" + periodes,
-                    "type": "GET"
+        var table = $('#table').DataTable({
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
                 },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'atlet.nama',
-                        name: 'Atlet'
-                    },
-                    {
-                        data: 'kriteria.keterangan',
-                        name: 'Kriteria'
-                    },
+                {
+                    data: 'atlet.nama',
+                    name: 'Atlet'
+                },
+                {
+                    data: 'kriteria.keterangan',
+                    name: 'Kriteria'
+                },
 
-                    {
-                        data: 'nilai',
-                        name: 'nilai'
-                    },
+                {
+                    data: 'nilai',
+                    name: 'nilai'
+                },
 
-                    {
-                        data: 'action',
-                        name: 'action'
-                    },
+                {
+                    data: 'action',
+                    name: 'action'
+                },
 
-                ]
+            ]
+        });
+
+        function refeshTable() {
+            var periodes = $('.periode').val();
+            var penilaian = $('.penilaian').val();
+
+            $.ajax({
+                url: "../dataTableInsert/" + periodes + "/" + penilaian,
+                type: 'GET',
+                success: function(data) {
+                    var table = $('#table').DataTable();
+                    table.clear();
+                    table.rows.add(data.data);
+                    table.draw();
+                    console.log(data)
+                }
             });
-
+        }
+        $(".datarefresh ").change(function() {
+            refeshTable()
+        });
         $('body').on('click', '.btn-action', function(elemen) {
             elemen.preventDefault();
             var selectedText = $(".penilaian").find("option:selected").text();
@@ -186,10 +194,10 @@
                     data: dataObject
                 }).then(response => {
                     console.log(response);
-                    table.draw()
+                    refeshTable()
                 }).catch(error => {
                     console.log(error)
-                    table.draw()
+                    refeshTable()
 
                 });
 
@@ -223,14 +231,12 @@
                     if (result.value) {
                         axios({
                             url: urlsdelete,
-                            credentials: true,
-                            method: "DELETE",
+                            method: "GET",
                         }).then(response => {
                             console.log(response);
-                            table.draw();
-                            swal2(data.status, data.message);
+                            refeshTable()
                         }).catch(error => {
-                            table.draw();
+                            refeshTable()
                         });
                     }
                 })

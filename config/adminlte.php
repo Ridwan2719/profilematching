@@ -265,16 +265,23 @@ return [
         ],
         [
             'text'        => 'Hitung',
-            'route'         => 'hitung.index',
+            'route'         => 'hitung.create',
             'icon'        => 'fas fa-fw fa-file',
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],
-        
+        [
+            'text'        => 'Laporan Hasil',
+            'route'         => 'hasil.index',
+            'icon'        => 'fas fa-fw fa-file',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
+
         [
             'text'    => 'Master',
             'icon'    => 'fas fa-fw fa-share',
-            'url'=>'#',
+            'url' => '#',
             'submenu' => [
                 [
                     'text' => 'Jenis Bobot',
@@ -291,7 +298,7 @@ return [
                     'route'  => 'jeniskriteria.index',
                     'icon'    => 'far fa-fw fa-file',
                 ],
-                
+
             ],
         ],
         // ['header' => 'Master'],

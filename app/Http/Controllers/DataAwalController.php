@@ -76,11 +76,11 @@ class DataAwalController extends Controller
         $penilaian->save();
         return $this->sendResponse($penilaian->toArray(), 'successfully.');
     }
-    public function hitunggap()
+    public function hitunggap(Request $request, $penilaian, $periode)
     {
 
-        $penilaianID = 1;
-        $periodeID = 1;
+        $penilaianID = $penilaian;
+        $periodeID = $periode;
         $dataNilai = \App\DataAwal::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->get();
         \App\GAP::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
         \App\NormaisasiBobot::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
@@ -131,8 +131,13 @@ class DataAwalController extends Controller
         // -- (SELECT @score:=0, @rank:=0) r
         // -- -- ORDER BY nilai DESC');
         // $data       = $collection->all();
-$collection = \DB::select("SELECT hasils.atlet_id, hasils.penilaian_id, hasils.periode_id, hasils.nilai, RANK() OVER(ORDER BY hasils.nilai DESC) AS 'Ranking'  FROM `hasils`");
-        return $collection;
+        // $detail = \DB::select("SELECT hasils.periode_id,hasils.penilaian_id, penilaians.keterangan as penilaian, periodes.keterangan as periode FROM `hasils` JOIN periodes ON periodes.id = hasils.periode_id JOIN penilaians ON penilaians.id = hasils.penilaian_id  WHERE hasils.penilaian_id=" . $penilaianID . " and hasils.periode_id=" . $periodeID." LIMIT 0,1");
+        // dd($detail);
+        // return $collection;
+        //    return $collection;
+        $detail = \App\Hasil::join('penilaians', 'penilaians.id', "=", 'hasils.penilaian_id')->join('periodes', 'periodes.id', "=", 'hasils.periode_id')->where('hasils.penilaian_id', $penilaianID)->where('hasils.periode_id', $periodeID)->groupBy('hasils.periode_id')->select('penilaians.keterangan as penilaian', 'hasils.*', 'periodes.keterangan as tanggal')->first();
+        // return $detail;
+        return view('hasil.detail', compact('detail'));
     }
     public function hitungNormalisasi()
     {
@@ -151,18 +156,20 @@ $collection = \DB::select("SELECT hasils.atlet_id, hasils.penilaian_id, hasils.p
 
     }
 
-    public function dataAwalTable(Request $request, $id)
+    public function dataAwalTable($periode, $penilaian)
     {
-        $dataTable = \App\DataAwal::with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
+        $dataTable = \App\DataAwal::where('periode_id', $periode)->where('penilaian_id', $penilaian)->with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
+
         return \Yajra\Datatables\Datatables::of($dataTable)
             //$query di masukkan kedalam Datatables
             ->addColumn('action', function ($q) {
+
                 //Kemudian kita menambahkan kolom baru , yaitu "action"
                 return view('links', [
                     //Kemudian dioper ke file links.blade.php
                     'model'      => $q,
                     // 'url_edit'   => route('penilaian.edit', $q->id),
-                    'url_hapus'  => route('hitung.destroy', $q->id),
+                    'url_hapus'  => route('deletedatawal', $q->id),
                     // 'url_detail' => route('penilaian.show', $q->id),
                 ]);
             })
@@ -201,9 +208,11 @@ $collection = \DB::select("SELECT hasils.atlet_id, hasils.penilaian_id, hasils.p
      * @param  \App\DataAwal  $dataAwal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DataAwal $dataAwal)
+    public function destroy(DataAwal $dataAwal,$id)
     {
         //
+        \App\DataAwal::where("id", $id)->delete();
+
         $dataAwal->delete();
         return $this->sendResponse($dataAwal->toArray(), 'deleted successfully.');
     }
