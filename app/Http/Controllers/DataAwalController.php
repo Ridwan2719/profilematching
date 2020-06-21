@@ -82,7 +82,7 @@ class DataAwalController extends Controller
         $penilaianID = (int)$penilaian;
         $periodeID = (int)$periode;
 
-        // $dataNilai = \DB:;
+        $dataNilai = \App\DataAwal::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->get();
         // dd($dataNilai);
         \App\GAP::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
         \App\NormaisasiBobot::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
@@ -90,16 +90,16 @@ class DataAwalController extends Controller
         \App\Hasil::where("periode_id", $periodeID)->where("penilaian_id", $penilaianID)->delete();
         //  $hapus->delete();
         //  return \App\Kriteria::where("id",$dataNilai[1])->first()->nilai;
-        // foreach ($dataNilai as $a => $b) {
-        //     $gap = new \App\GAP();
-        //     $gap->atlet_id = $b['atlet_id'];
-        //     $gap->periode_id = $b['periode_id'];
-        //     $gap->kriteria_id = $b['kriteria_id'];
-        //     $gap->penilaian_id = $b['penilaian_id'];
-        //     $gap->nilai = $b['nilai'] - \App\Kriteria::where('id', $b['kriteria_id'])->first()->nilai;
-        //     $gap->save();
-        // }
-        DB::select("INSERT INTO `g_a_p_s`(`atlet_id`, `kriteria_id`, `nilai`, `periode_id`, `penilaian_id`) SELECT data_awals.atlet_id, data_awals.kriteria_id,  data_awals.nilai - kriterias.nilai AS Hasil, data_awals.periode_id, data_awals.penilaian_id FROM `data_awals` JOIN kriterias ON kriterias.id = data_awals.kriteria_id WHERE data_awals.periode_id =" . $periodeID . " AND data_awals.penilaian_id =" . $penilaianID);
+        foreach ($dataNilai as $a => $b) {
+            $gap = new \App\GAP();
+            $gap->atlet_id = $b['atlet_id'];
+            $gap->periode_id = $b['periode_id'];
+            $gap->kriteria_id = $b['kriteria_id'];
+            $gap->penilaian_id = $b['penilaian_id'];
+            $gap->nilai = $b['nilai'] - \App\Kriteria::where('id', $b['kriteria_id'])->first()->nilai;
+            $gap->save();
+        }
+       // DB::select("INSERT INTO `g_a_p_s`(`atlet_id`, `kriteria_id`, `nilai`, `periode_id`, `penilaian_id`) SELECT data_awals.atlet_id, data_awals.kriteria_id,  data_awals.nilai - kriterias.nilai AS Hasil, data_awals.periode_id, data_awals.penilaian_id FROM `data_awals` JOIN kriterias ON kriterias.id = data_awals.kriteria_id WHERE data_awals.periode_id =" . $periodeID . " AND data_awals.penilaian_id =" . $penilaianID);
         DB::select("INSERT INTO `normaisasi_bobots`(`penilaian_id`, `atlet_id`, `periode_id`, `kriteria_id`, `nilai`,`bobot_id`) SELECT g_a_p_s.penilaian_id, g_a_p_s.atlet_id, g_a_p_s.periode_id, g_a_p_s.kriteria_id, bobot_awals.nilai, kriterias.jenisbobot_id FROM `g_a_p_s` JOIN penilaians ON penilaians.id = g_a_p_s.penilaian_id JOIN jenisbobots ON jenisbobots.id = penilaians.bobot JOIN bobot_awals ON bobot_awals.jenisbobot_id = jenisbobots.id JOIN kriterias on kriterias.id = g_a_p_s.kriteria_id  WHERE g_a_p_s.penilaian_id=" . $penilaianID . " and g_a_p_s.periode_id=" . $periodeID . " and g_a_p_s.nilai BETWEEN bobot_awals.gap_b AND bobot_awals.gap_b");
         //DB::select("INSERT INTO `coresecondaries`( `penilaian_id`, `periode_id`, `atlet_id`, `core`, `second`)SELECT normaisasi_bobots.penilaian_id, normaisasi_bobots.periode_id, normaisasi_bobots.atlet_id, SUM(IF(kriterias.jenisbobot_id = 1, normaisasi_bobots.nilai, 0)) AS Core, SUM(IF(kriterias.jenisbobot_id = 2, normaisasi_bobots.nilai, 0)) AS Secondary FROM `normaisasi_bobots` JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN jenis_kriterias ON jenis_kriterias.id = kriterias.jenisbobot_id WHERE normaisasi_bobots.penilaian_id=" . $penilaianID . " and normaisasi_bobots.periode_id=" . $periodeID);
         //DB::select("INSERT INTO `hasils`(`atlet_id`, `penilaian_id`, `nilai`, `periode_id`)SELECT coresecondaries.atlet_id, coresecondaries.penilaian_id,((coresecondaries.core*60/100)/2) + ((coresecondaries.second*40/100)/2) AS Hasil, coresecondaries.periode_id Hasil FROM `coresecondaries` WHERE coresecondaries.periode_id = " . $penilaianID . " AND coresecondaries.penilaian_id = " . $penilaianID);
