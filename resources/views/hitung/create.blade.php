@@ -21,14 +21,14 @@
         </div>
         @endif
         <div class="card">
-            {!! Form::open(array('route' => ['hitung.store'],'method'=>'POST','role' =>
-            'form','autocomplete'=>'off', 'id' => 'my_form','enctype'=>"multipart/form-data")) !!}
+            <!-- {!! Form::open(array('route' => ['hitung.store'],'method'=>'POST','role' =>
+            'form','autocomplete'=>'off', 'id' => 'my_form','enctype'=>"multipart/form-data")) !!} -->
             <div class="card-header">
                 <h3 class="card-title">
                     Hitung</h3>
 
                 <div class="card-tools">
-                    <button type="submit" id="saveBtn" value="create" class="btn btn-primary  btn-sm btn-flat">Simpan</button>
+                    <button class="btn btn-success btn-action btn-sm btn-flat btn-hitung">Hitung Data</button>
                 </div>
             </div>
             <div class="card-body">
@@ -100,7 +100,7 @@
                 </table>
             </div>
 
-            {!! Form::close() !!}
+            <!-- {!! Form::close() !!} -->
 
         </div>
 
@@ -161,6 +161,11 @@
         }
         $(".datarefresh ").change(function() {
             refeshTable()
+        });
+        $('body').on('click', '.btn-hitung', function(elemen) {
+            var periodes = $('.periode').val();
+            var penilaian = $('.penilaian').val();
+            window.open("{{url('/')}}/home/detailHasil/" + periodes + "/" + penilaian)
         });
         $('body').on('click', '.btn-action', function(elemen) {
             elemen.preventDefault();
