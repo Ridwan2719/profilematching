@@ -19,7 +19,7 @@ class CreateCoresecondariesTable extends Migration
             $table->string("periode_id");
             $table->string("atlet_id");
             $table->string("jenisbobot_id");
-            $table->string("hasil");
+            $table->double("hasil");
             $table->timestamps();
         });
     }

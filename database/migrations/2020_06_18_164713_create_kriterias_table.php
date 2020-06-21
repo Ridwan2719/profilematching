@@ -18,7 +18,7 @@ class CreateKriteriasTable extends Migration
             $table->string('penilaian_id');
             $table->string('jenisbobot_id');
             $table->string('keterangan');
-            $table->string('nilai');
+            $table->double('nilai');
             $table->timestamps();
         });
     }

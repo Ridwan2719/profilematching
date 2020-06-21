@@ -162,12 +162,11 @@
         $(".datarefresh ").change(function() {
             refeshTable()
         });
-            $('body').on('click', '.btn-hitung', function(elemen) {
-
+        $('body').on('click', '.btn-hitung', function(elemen) {
             var periodes = $('.periode').val();
             var penilaian = $('.penilaian').val();
-
-            window.open("{{url('/')}}/home/detailHasil/" + penilaian + "/" + periodes)
+            console.log(periodes + " / " + Penilaian);
+            window.location.href = "{{url('/')}}/home/detailHasil/" + periodes + "/" + penilaian;
         });
         $('body').on('click', '.btn-action', function(elemen) {
             elemen.preventDefault();

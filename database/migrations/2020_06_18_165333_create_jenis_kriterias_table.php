@@ -16,7 +16,7 @@ class CreateJenisKriteriasTable extends Migration
         Schema::create('jenis_kriterias', function (Blueprint $table) {
             $table->id();
             $table->string('keterangan');
-            $table->string('nilai');
+            $table->double('nilai');
             $table->timestamps();
         });
     }

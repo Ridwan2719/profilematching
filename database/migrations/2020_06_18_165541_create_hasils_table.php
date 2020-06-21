@@ -17,7 +17,7 @@ class CreateHasilsTable extends Migration
             $table->id();
             $table->string('atlet_id');
             $table->string('penilaian_id');
-            $table->string('nilai');
+            $table->double('nilai');
             $table->string('rank');
             $table->string('periode_id');
             $table->timestamps();

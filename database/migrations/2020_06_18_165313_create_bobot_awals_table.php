@@ -18,7 +18,7 @@ class CreateBobotAwalsTable extends Migration
             $table->string('gap_a');
             $table->string('gap_b');
             $table->string('keterangan');
-            $table->string('nilai');
+            $table->double('nilai');
             $table->string('jenisbobot_id');
             $table->timestamps();
         });

@@ -20,7 +20,7 @@ class CreateNormaisasiBobotsTable extends Migration
             $table->string('periode_id');
             $table->string('kriteria_id');
             $table->string('bobot_id');
-            $table->string('nilai');
+            $table->double('nilai');
             $table->timestamps();
         });
     }

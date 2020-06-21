@@ -165,14 +165,15 @@ class DatabaseSeeder extends Seeder
             'penilaian_id' => 1,
             'jenisbobot_id' => 1,
             'nilai' => 3,
-            'keterangan' => "Nihhon",
+            'keterangan' => "Sambon",
         ]);
         \App\Kriteria::create([
             'penilaian_id' => 1,
             'jenisbobot_id' => 1,
             'nilai' => 2,
-            'keterangan' => "Sanbon",
+            'keterangan' => "Nihhon",
         ]);
+
         \App\Kriteria::create([
             'penilaian_id' => 1,
             'jenisbobot_id' => 2,
@@ -216,12 +217,7 @@ class DatabaseSeeder extends Seeder
             'keterangan' => "Kinerja Bunkai",
         ]);
         \App\Atlet::create([
-            'nama' => "User D",
-            'umur' => 12,
-            'kelas' => 2,
-        ]);
-        \App\Atlet::create([
-            'nama' => "User C",
+            'nama' => "User A",
             'umur' => 12,
             'kelas' => 2,
         ]);
@@ -231,12 +227,17 @@ class DatabaseSeeder extends Seeder
             'kelas' => 2,
         ]);
         \App\Atlet::create([
-            'nama' => "User A",
+            'nama' => "User C",
+            'umur' => 12,
+            'kelas' => 2,
+        ]);
+        \App\Atlet::create([
+            'nama' => "User D",
             'umur' => 12,
             'kelas' => 2,
         ]);
         \App\Periode::create([
-            'keterangan' => "20/06/2020",
+            'keterangan' => "2020-06-20",
             'status' => "Aktif",
         ]);
         \App\DataAwal::create([
