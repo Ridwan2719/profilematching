@@ -35,6 +35,7 @@ class HasilController extends Controller
     public function dataTables2($penilaian, $periode)
     {
         $query = \DB::select("SELECT hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai, RANK() OVER(ORDER BY hasils.nilai DESC) AS 'Ranking' FROM `hasils` JOIN periodes ON periodes.id = hasils.periode_id JOIN atlets ON atlets.id = hasils.atlet_id  WHERE hasils.penilaian_id=" . $penilaian . " and hasils.periode_id=" . $periode);
+        // return $query;
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -124,7 +125,5 @@ class HasilController extends Controller
         //
     }
     public function datahasil(Request $request)
-    { 
-        
-    }
+    { }
 }

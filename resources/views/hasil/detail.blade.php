@@ -18,7 +18,6 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Detail Hasil Perhitungan {!! $detail->penilaian !!} pada {{ $detail->tanggal}}</h3>
 
                 <div class="card-tools">
                     <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
@@ -173,7 +172,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    "url": "{{ route('tableHasildetail', ['periode' => $detail->periode_id, 'penilaian' => $detail->penilaian_id]) }}",
+                    "url": "{{ route('tableHasildetail', ['penilaian' => $penilaianID,'periode' => $periodeID ]) }}",
                     "type": "GET"
                 },
                 columns: [{
