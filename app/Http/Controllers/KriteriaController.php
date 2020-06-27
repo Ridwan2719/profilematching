@@ -18,21 +18,21 @@ class KriteriaController extends Controller
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
-            // ->addColumn('action', function ($q) {
-            //Kemudian kita menambahkan kolom baru , yaitu "action"
-            // return view('links', [
-            //Kemudian dioper ke file links.blade.php
-            // 'model'      => $q,
-            // 'url_edit'   => route('penilaian.edit', $q->id),
-            // 'url_hapus'  => route('bobot.destroy', $q->id),
-            // 'url_detail' => route('penilaian.show', $q->id),
-            // ]);
-            // })
+            ->addColumn('action', function ($q) {
+                //Kemudian kita menambahkan kolom baru , yaitu "action"
+                return view('links', [
+                    //Kemudian dioper ke file links.blade.php
+                    'model'      => $q,
+                    // 'url_edit'   => route('penilaian.edit', $q->id),
+                    'url_hapus'  => route('kriteria.destroy', $q->id),
+                    // 'url_detail' => route('penilaian.show', $q->id),
+                ]);
+            })
             ->addIndexColumn()
             // ->rawColumns(['other-columns'])
             ->make(true);
     }
-    
+
     public function index()
     {
         //
@@ -40,10 +40,10 @@ class KriteriaController extends Controller
     }
     public function dataDropdown(Request $request)
     {
-        $data = \App\Kriteria::where("penilaian_id",$request->id)->get();
+        $data = \App\Kriteria::where("penilaian_id", $request->id)->get();
         $data2 = "";
-        foreach($data as $a=>$b){
-            $data2 .= "<option value='".$b['id']."'>".$b["keterangan"]."</option>";
+        foreach ($data as $a => $b) {
+            $data2 .= "<option value='" . $b['id'] . "'>" . $b["keterangan"] . "</option>";
         }
         return $this->sendResponse($data2, 'successfully.');
     }
@@ -64,7 +64,7 @@ class KriteriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   
+
     public function store(Request $request)
     {
         //
@@ -121,8 +121,11 @@ class KriteriaController extends Controller
      * @param  \App\Kriteria  $kriteria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kriteria $kriteria)
+    public function destroy($id, Kriteria $kriteria)
     {
         //
+        $metaLink = Kriteria::find($id);
+        $metaLink->delete();
+        return $this->sendResponse($metaLink->toArray(), 'deleted successfully.');
     }
 }

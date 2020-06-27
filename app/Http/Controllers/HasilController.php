@@ -14,7 +14,7 @@ class HasilController extends Controller
      */
     public function dataTables()
     {
-        $query = \App\Hasil::join('periodes', 'hasils.periode_id', '=', 'periodes.id')->join('penilaians', 'hasils.penilaian_id', '=', 'penilaians.id')->select("periodes.keterangan as tanggal", "penilaians.keterangan", "hasils.periode_id", "hasils.penilaian_id")->orderBy('hasils.id', 'desc')->groupBy('hasils.periode_id')->get();
+        $query = \App\Hasil::join('periodes', 'hasils.periode_id', '=', 'periodes.id')->join('penilaians', 'hasils.penilaian_id', '=', 'penilaians.id')->select("periodes.keterangan as tanggal", "penilaians.keterangan", "hasils.periode_id", "hasils.penilaian_id", "hasils.id",)->orderBy('hasils.id', 'desc')->groupBy('hasils.periode_id')->get();
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -24,7 +24,7 @@ class HasilController extends Controller
                     //Kemudian dioper ke file links.blade.php
                     'model'      => $q,
                     // 'url_edit'   => route('penilaian.edit', $q->id),
-                    // 'url_hapus'  => route('bobot.destroy', $q->id),
+                    'url_hapus'  => route('hasil.destroy', $q->id),
                     'url_detail' => route('detailHasil', ['periode' => $q->periode_id, 'penilaian' => $q->penilaian_id]),
                 ]);
             })
@@ -120,9 +120,12 @@ class HasilController extends Controller
      * @param  \App\Hasil  $hasil
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hasil $hasil)
+    public function destroy($id)
     {
         //
+        $metaLink = \App\Hasil::find($id);
+        $metaLink->delete();
+        return $this->sendResponse($metaLink->toArray(), 'deleted successfully.');
     }
     public function datahasil(Request $request)
     { }

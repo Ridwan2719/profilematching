@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('hasil', 'HasilController');
         Route::get('tableHasil', 'HasilController@dataTables')->name('tableHasil');
+        // Route::get('hasiledelete/{}', 'HasilController@destory')->name('hasiledelete');
         Route::get('tableHasildetail/{periode}/{penilaian}', 'HasilController@dataTables2')->name('tableHasildetail');
         Route::get('detailHasil/{periode}/{penilaian}', 'DataAwalController@hitunggap')->name('detailHasil');
 

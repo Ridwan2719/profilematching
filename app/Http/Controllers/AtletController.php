@@ -24,7 +24,7 @@ class AtletController extends Controller
                     //Kemudian dioper ke file links.blade.php
                     'model'      => $q,
                     'url_edit'   => route('atlet.edit', $q->id),
-                    'url_hapus'  => route('bobot.destroy', $q->id),
+                    'url_hapus'  => route('atlet.destroy', $q->id),
                     // 'url_detail' => route('penilaian.show', $q->id),
                 ]);
             })
@@ -126,8 +126,11 @@ class AtletController extends Controller
      * @param  \App\Atlet  $atlet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Atlet $atlet)
+    public function destroy($id)
     {
         //
+        $metaLink = Atlet::find($id);
+        $metaLink->delete();
+        return $this->sendResponse($metaLink->toArray(), 'deleted successfully.');
     }
 }

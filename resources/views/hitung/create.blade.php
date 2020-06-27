@@ -43,7 +43,7 @@
                     <div class="form-group row  col-6">
                         <label for="nama" class="col-2 col-form-label">Penilaian</label>
                         <div class="col-6">
-                            {!! Form::select('penilaian_id', \App\Penilaian::all()->pluck('keterangan', 'id')->toArray(), null,['class'=>'select2 form-control penilaian datarefresh']) !!}
+                            {!! Form::select('penilaian_id', \App\Penilaian::all()->pluck('keterangan', 'id')->toArray(), "1",['class'=>'select2 form-control penilaian datarefresh']) !!}
                         </div>
                     </div>
                 </div>
@@ -165,7 +165,6 @@
         $('body').on('click', '.btn-hitung', function(elemen) {
             var periodes = $('.periode').val();
             var penilaian = $('.penilaian').val();
-            console.log(periodes + " / " + Penilaian);
             window.location.href = "{{url('/')}}/home/detailHasil/" + periodes + "/" + penilaian;
         });
         $('body').on('click', '.btn-action', function(elemen) {
@@ -265,10 +264,22 @@
                 $(".Kriteria-content").html(response.data.data)
             }).catch(error => {
                 console.log(error)
-
             });
         });
-
+        var selectedValue = $('.penilaian').find("option:selected").val();
+        const data = {};
+        data["id"] = selectedValue;
+        axios({
+            url: "{{route('dataDropdown')}}",
+            credentials: true,
+            method: "POST",
+            data: data
+        }).then(response => {
+            console.log(response.data);
+            $(".Kriteria-content").html(response.data.data)
+        }).catch(error => {
+            console.log(error)
+        });
     });
 </script>
 @endsection

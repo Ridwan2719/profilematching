@@ -35,9 +35,10 @@
                         <tr>
                             <th witdh="5%">No</th>
                             <th witdh="30%">Penilaian</th>
-                            <th witdh="40%">Keterangan</th>
+                            <th witdh="35%">Keterangan</th>
                             <th witdh="20%">Jenis Kreteria</th>
                             <th witdh="15%">Nilai</th>
+                            <th witdh="5%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -201,6 +202,10 @@
                     {
                         data: 'nilai',
                         name: 'nilai'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action'
                     },
 
                 ]
