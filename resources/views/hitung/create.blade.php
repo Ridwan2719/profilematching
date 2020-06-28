@@ -37,7 +37,7 @@
                     <div class="form-group row col-6">
                         <label for="nama" class="col-2 col-form-label">Periode</label>
                         <div class="col-6">
-                            {!! Form::select('periode_id', \App\Periode::all()->pluck('keterangan', 'id')->toArray(), null,['class'=>'select2 form-control periode datarefresh']) !!}
+                            {!! Form::select('periode_id', \App\Periode::orderBy('id','desc')->pluck('keterangan', 'id')->toArray(), null,['class'=>'select2 form-control periode datarefresh']) !!}
                         </div>
                     </div>
                     <div class="form-group row  col-6">
