@@ -76,7 +76,7 @@ class DataAwalController extends Controller
         $penilaian->save();
         return $this->sendResponse($penilaian->toArray(), 'successfully.');
     }
-    public function hitunggap(Request $request, $penilaian, $periode)
+    public function hitunggap(Request $request,  $periode, $penilaian)
     {
 
         $penilaianID = (int) $penilaian;
