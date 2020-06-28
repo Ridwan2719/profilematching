@@ -140,7 +140,8 @@ class DataAwalController extends Controller
         //    return $collection;
         $detail = \App\Hasil::join('penilaians', 'penilaians.id', "=", 'hasils.penilaian_id')->join('periodes', 'periodes.id', "=", 'hasils.periode_id')->where('hasils.penilaian_id', $penilaianID)->where('hasils.periode_id', $periodeID)->groupBy('hasils.periode_id')->select('penilaians.keterangan as penilaian', 'hasils.*', 'periodes.keterangan as tanggal')->first();
         // dd($detail);
-        return view('hasil.detail',compact("periodeID","penilaianID"));
+        return view('hasil.index');
+        // return view('hasil.detail',compact("periodeID","penilaianID"));
     }
     public function hitungNormalisasi()
     {

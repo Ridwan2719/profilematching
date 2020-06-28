@@ -277,6 +277,7 @@
         }).then(response => {
             console.log(response.data);
             $(".Kriteria-content").html(response.data.data)
+            refeshTable()
         }).catch(error => {
             console.log(error)
         });
