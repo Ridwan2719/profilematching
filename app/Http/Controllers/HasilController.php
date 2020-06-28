@@ -34,8 +34,14 @@ class HasilController extends Controller
     }
     public function dataTables2($penilaian, $periode)
     {
-        $query = \DB::select("SELECT hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai, RANK() OVER(ORDER BY hasils.nilai DESC) AS 'Ranking' FROM `hasils` JOIN periodes ON periodes.id = hasils.periode_id JOIN atlets ON atlets.id = hasils.atlet_id  WHERE hasils.penilaian_id=" . $penilaian . " and hasils.periode_id=" . $periode);
+        $table = (new \App\Hasil)->getTable();
+        $select = \DB::raw("@i := coalesce(@i + 1, 1) ranking, {$table}.*");
+        $query = \App\Hasil::where('penilaian_id',$penilaian)->where('periode_id',$periode)->with('atlet','penilaian')->select($select)->orderByDesc('nilai')->get();
+        // return $users;
+        // $query = \App\Hasil::withRowNumber()->get();//where('hasils.periode_id',$periode)->where('hasils.penilaian_id',$penilaian)->join('periodes','periodes.id','=','hasils.periode_id')->join('atlets','atlets.id','=','hasils.atlet_id')->orderBy('hasils.nilai','desc')->select( \DB::raw("hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai,  1+(SELECT count(*) from hasils a WHERE a.nilai > b.nilai) as RNK"))->get();
         // return $query;
+        // $query = \DB::select("SELECT hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai, RANK() OVER(ORDER BY hasils.nilai DESC) AS 'Ranking' FROM `hasils` JOIN periodes ON periodes.id = hasils.periode_id JOIN atlets ON atlets.id = hasils.atlet_id  WHERE hasils.penilaian_id=" . $penilaian . " and hasils.periode_id=" . $periode);
+       
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables

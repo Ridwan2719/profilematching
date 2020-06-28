@@ -22,7 +22,18 @@ class Hasil extends Model
     }
     public function getPostionAttribute()
     {
-        return $this->newQuery()->where('number', '>=', $this->number)->count();
+        return $this->newQuery()->where('nilai', '>=', $this->nilai)->count();
     }
-    
+    public function atlet()
+    {
+        return $this->belongsTo('App\Atlet', 'atlet_id', 'id');
+    }
+    public function penilaian()
+    {
+        return $this->belongsTo('App\Penilaian', 'penilaian_id', 'id');
+    }
+    public function periode()
+    {
+        return $this->belongsTo('App\Periode', 'periode_id', 'id');
+    }
 }

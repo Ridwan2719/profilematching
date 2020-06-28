@@ -183,8 +183,8 @@
                     },
 
                     {
-                        data: 'nama',
-                        name: 'nama'
+                        data: 'atlet.nama',
+                        name: 'atlet.nama'
                     },
                     {
                         data: 'nilai',
@@ -192,8 +192,8 @@
                     },
 
                     {
-                        data: 'Ranking',
-                        name: 'Ranking'
+                        data: 'ranking',
+                        name: 'ranking'
                     },
 
                 ]
