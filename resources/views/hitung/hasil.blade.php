@@ -32,7 +32,7 @@
 
                 <table class="table table-striped" id="table">
                     <thead>
-                    @foreach(compact as $compact)
+                        @foreach(compact as $compact)
                         <tr>
                             <th witdh="5%">No</th>
                             <th witdh="20%">Atlet</th>
@@ -114,8 +114,6 @@
         $(document).ajaxStart(function() {
             // Pace.restart();
         });
-
-       
 
         function showModal(el) {
             var urls = el.attr('link'),

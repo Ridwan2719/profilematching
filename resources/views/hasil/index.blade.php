@@ -63,10 +63,10 @@
             // } else 
             if ($(this).hasClass('btn-detail')) {
                 var urls = $(this).attr('link');
-                window.open(urls)
-            // } else if ($(this).hasClass('btn-edit')) {
-            //     var urls = $(this).attr('link');
-            //     window.open(urls)
+                window.location.href = urls
+                // } else if ($(this).hasClass('btn-edit')) {
+                //     var urls = $(this).attr('link');
+                //     window.open(urls)
             } else if ($(this).hasClass('delete')) {
                 const urlsdelete = $(this).attr('link');
                 Swal.fire({
