@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('hasiledelete/{}', 'HasilController@destory')->name('hasiledelete');
         Route::get('tableHasildetail/{periode}/{penilaian}', 'HasilController@dataTables2')->name('tableHasildetail');
         Route::get('detailHasil/{periode}/{penilaian}', 'DataAwalController@hitunggap')->name('detailHasil');
+        Route::get('detailHasil2/{periode}/{penilaian}', 'DataAwalController@detailHitung')->name('detailHasil2');
 
         Route::resource('hitung', 'DataAwalController');
         Route::get('tableHitung', 'DataAwalController@dataTables')->name('tableHitung');
