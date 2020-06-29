@@ -52,6 +52,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('periode', 'PeriodeController');
         Route::get('tablePeriode', 'PeriodeController@dataTables')->name('tablePeriode');
 
+        Route::resource('kelasatlet', 'KelasatletController');
+        Route::get('tablekelasatlet', 'KelasatletController@dataTables')->name('tablekelasatlet');
+
         Route::resource('atlet', 'AtletController');
         Route::get('tableAtlet', 'AtletController@dataTables')->name('tableAtlet');
 

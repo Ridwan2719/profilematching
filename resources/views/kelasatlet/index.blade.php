@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Master Atlet')
+@section('title', 'Kelas Atlet')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Atlet</h1>
+<h1 class="m-0 text-dark">Kelas Atlet</h1>
 @stop
 
 @section('content')
@@ -22,8 +22,8 @@
                     Data Atlet</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('atlet.create') }}" class="btn btn-primary  btn-sm btn-flat">
-                        Tambah baru Atlet
+                    <a href="{{ route('kelasatlet.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                        Tambah Kelas Diikuti
                     </a>
                 </div>
             </div>
@@ -33,11 +33,10 @@
                 <table class="table table-striped" id="table">
                     <thead>
                         <tr>
-                            <th witdh="5%">No</th>
-                            <th witdh="50%">Nama</th>
-                            <th witdh="20%">Bobot</th>
-                            <th witdh="20%">Umur</th>
-                            <th witdh="10%">Action</th>
+                            <th witdh="10%">No</th>
+                            <th witdh="40%">Atlet</th>
+                            <th witdh="40%">Kelas</th>
+                            <th witdh="10%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,7 +81,6 @@
                     if (result.value) {
                         axios({
                             url: urlsdelete,
-                            credentials: true,
                             method: "DELETE",
                         }).then(response => {
                             console.log(response);
@@ -175,7 +173,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    'url': "{!! route('tableAtlet') !!}",
+                    'url': "{!! route('tablekelasatlet') !!}",
                     "type": "GET"
                 },
                 columns: [{
@@ -189,20 +187,13 @@
                         name: 'nama'
                     },
                     {
-                        data: 'kelas',
-                        name: 'kelas'
+                        data: 'keterangan',
+                        name: 'keterangan'
                     },
-
-                    {
-                        data: 'umur',
-                        name: 'umur'
-                    },
-
                     {
                         data: 'action',
                         name: 'action'
                     },
-
                 ]
             });
 

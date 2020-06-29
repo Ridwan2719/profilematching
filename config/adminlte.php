@@ -247,6 +247,11 @@ return [
             'icon'    => 'fas fa-fw fa-file',
         ],
         [
+            'text' => 'Kelas Atlet',
+            'route'  => 'kelasatlet.index',
+            'icon'    => 'fas fa-fw fa-file',
+        ],
+        [
             'text' => 'Kriteria',
             'route'  => 'kriteria.index',
             'icon'    => 'fas fa-fw fa-file',

@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="nama" class="col-2 col-form-label">Kelas</label>
+                    <label for="nama" class="col-2 col-form-label">Bobot</label>
                     <div class="col-6">
                     <input class="form-control" type="text" value="" name="kelas" />
                     </div>
