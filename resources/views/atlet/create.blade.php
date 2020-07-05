@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Penilaian')
+@section('title', 'Atlet Baru')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Tambah Kreteria</h1>
+<h1 class="m-0 text-dark">Tambah Atlet</h1>
 @stop
 
 @section('content')
@@ -25,7 +25,7 @@
             'form','autocomplete'=>'off', 'id' => 'my_form','enctype'=>"multipart/form-data")) !!}
             <div class="card-header">
                 <h3 class="card-title">
-                    Tambah Data Kreteria</h3>
+                    Tambah Data Atlet</h3>
 
                 <div class="card-tools">
                     <button type="submit" id="saveBtn" value="create" class="btn btn-primary  btn-sm btn-flat">Simpan</button>
