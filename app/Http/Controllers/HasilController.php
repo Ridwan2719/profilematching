@@ -14,7 +14,7 @@ class HasilController extends Controller
      */
     public function dataTables()
     {
-        $query = \App\Hasil::join('periodes', 'hasils.periode_id', '=', 'periodes.id')->join('penilaians', 'hasils.penilaian_id', '=', 'penilaians.id')->select("periodes.keterangan as tanggal", "penilaians.keterangan", "hasils.periode_id", "hasils.penilaian_id", "hasils.id",)->orderBy('hasils.id', 'desc')->groupBy('hasils.periode_id')->get();
+        $query = \App\Hasil::join('periodes', 'hasils.periode_id', '=', 'periodes.id')->join('penilaians', 'hasils.penilaian_id', '=', 'penilaians.id')->select("periodes.keterangan as tanggal", "penilaians.keterangan", "hasils.periode_id", "hasils.penilaian_id", "hasils.id",)->orderBy('hasils.id', 'desc')->groupBy('hasils.periode_id','hasils.penilaian_id')->get();
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
