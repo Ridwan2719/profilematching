@@ -184,19 +184,13 @@ class DatabaseSeeder extends Seeder
             'penilaian_id' => 2,
             'jenisbobot_id' => 1,
             'nilai' => 80,
-            'keterangan' => "Kinerja Atlet",
+            'keterangan' => "Kinerja Teknis",
         ]);
         \App\Kriteria::create([
             'penilaian_id' => 2,
             'jenisbobot_id' => 2,
-            'nilai' => 80,
-            'keterangan' => "Kinerja Atlet",
-        ]);
-        \App\Kriteria::create([
-            'penilaian_id' => 2,
-            'jenisbobot_id' => 1,
             'nilai' => 70,
-            'keterangan' => "Atlet Beregu",
+            'keterangan' => "Kinerja Atlet",
         ]);
         \App\Kriteria::create([
             'penilaian_id' => 3,
