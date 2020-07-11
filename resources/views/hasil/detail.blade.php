@@ -3,14 +3,13 @@
 @section('title', 'Detail Hasil')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Detail Hasil </h1>
+<h1 class="m-0 text-dark">Detail Hasil Penilaian {{$dataPenilaian->keterangan}} Periode {{$dataPeriode->keterangan}} </h1>
 @stop
 
 @section('content')
 <div class="row">
-
-  <!-- Tabel Data Awal -->
-<div class="col-12">
+    <!-- Tabel Data Awal -->
+    <div class="col-12">
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -21,11 +20,11 @@
             <div class="card-header">
                 <h3 class="card-title">
                     Tabel Data Awal
-                <div class="card-tools">
-                    <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                    <div class="card-tools">
+                        <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
                         Tambah baru Bobot
                     </a> -->
-                </div>
+                    </div>
             </div>
             <div class="card-body">
 
@@ -37,7 +36,7 @@
                             <th witdh="40%">Atlet</th>
                             <th witdh="30%">Kriteria</th>
                             <th witdh="20%">Nilai</th>
-                          
+
                         </tr>
                     </thead>
                     <tbody>
@@ -48,7 +47,7 @@
     </div>
 
     <!-- Tabel Gaps -->
-<div class="col-12">
+    <div class="col-12">
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -58,12 +57,12 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                Tabel Gaps (Data Awal - Nilai Profil Posisi Per Kriteria)
-                <div class="card-tools">
-                    <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                    Tabel Gaps (Data Awal - Nilai Profil Posisi Per Kriteria)
+                    <div class="card-tools">
+                        <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
                         Tambah baru Bobot
                     </a> -->
-                </div>
+                    </div>
             </div>
             <div class="card-body">
 
@@ -77,7 +76,7 @@
                             <th witdh="15%">Nilai Awal</th>
                             <th witdh="15%">Profil Posisi</th>
                             <th witdh="15%">Nilai GAP</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -87,8 +86,8 @@
         </div>
     </div>
 
-      <!-- Tabel Normalisasi  -->
-<div class="col-12">
+    <!-- Tabel Normalisasi  -->
+    <div class="col-12">
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -98,12 +97,12 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                Tabel Normalisasi (Hasil Dari Perbandingan Tabel Gaps dan Tabel Bobot)
-                <div class="card-tools">
-                    <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                    Tabel Normalisasi (Hasil Dari Perbandingan Tabel Gaps dan Tabel Bobot)
+                    <div class="card-tools">
+                        <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
                         Tambah baru Bobot
                     </a> -->
-                </div>
+                    </div>
             </div>
             <div class="card-body">
 
@@ -116,7 +115,7 @@
                             <th witdh="20%">Kriteria</th>
                             <th witdh="20%">Nilai GAP</th>
                             <th witdh="20%">Nilai Normalisasi</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -126,8 +125,8 @@
         </div>
     </div>
 
-     <!-- Tabel Core & Secondary  -->
-<div class="col-12">
+    <!-- Tabel Core & Secondary  -->
+    <div class="col-12">
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -137,12 +136,12 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                Tabel Core & Secondary (Hasil Tabel Normalisasi dipisahkan dan dikalikan per jenis kriteria )
-                <div class="card-tools">
-                    <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                    Tabel Core & Secondary (Hasil Tabel Normalisasi dipisahkan dan dikalikan per jenis kriteria )
+                    <div class="card-tools">
+                        <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
                         Tambah baru Bobot
                     </a> -->
-                </div>
+                    </div>
             </div>
             <div class="card-body">
 
@@ -156,7 +155,7 @@
                             <th witdh="15%">Nilai Normalisasi</th>
                             <th witdh="15%">Jenis Kriteria</th>
                             <th witdh="15%">Persentase Jenis Kriteria</th>
-                           
+
                         </tr>
                     </thead>
                     <tbody>
@@ -166,7 +165,7 @@
         </div>
     </div>
 
-<!-- Tabel Hasil -->
+    <!-- Tabel Hasil -->
     <div class="col-12">
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
@@ -178,11 +177,11 @@
             <div class="card-header">
                 <h3 class="card-title">
                     Tabel Hasil Perhitungan (Hasil Dari Penjumlahan Nilai Core + Nilai Secondary Per Atlet)
-                <div class="card-tools">
-                    <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
+                    <div class="card-tools">
+                        <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
                         Tambah baru Bobot
                     </a> -->
-                </div>
+                    </div>
             </div>
             <div class="card-body">
 
@@ -371,7 +370,7 @@
                 ]
             });
 
-            tabledata =
+        tabledata =
             $('#table_dataawal1').DataTable({
                 //server-side
                 processing: true,
@@ -392,7 +391,7 @@
                         name: 'atlet.nama'
                     },
 
-                    
+
                     {
                         data: 'kriteria.keterangan',
                         name: 'Kriteria'
@@ -407,7 +406,7 @@
                 ]
             });
 
-            tablegaps =
+        tablegaps =
             $('#table_gaps').DataTable({
                 //server-side
                 processing: true,
@@ -428,7 +427,7 @@
                         name: 'nama'
                     },
 
-                    
+
                     {
                         data: 'keterangan',
                         name: 'Kriteria'
@@ -454,7 +453,7 @@
                 ]
             });
 
-            tablenormalisasi =
+        tablenormalisasi =
             $('#table_normalisasi').DataTable({
                 //server-side
                 processing: true,
@@ -494,7 +493,7 @@
             });
 
 
-            tablecoresecondary =
+        tablecoresecondary =
             $('#table_coresecondary').DataTable({
                 //server-side
                 processing: true,
@@ -514,7 +513,7 @@
                         data: 'nama',
                         name: 'nama'
                     },
-   
+
                     {
                         data: 'kriterias',
                         name: 'kriterias'

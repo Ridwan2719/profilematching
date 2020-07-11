@@ -12,10 +12,10 @@ class HasilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function dataTables()
     {
-        $query = \App\Hasil::join('periodes', 'hasils.periode_id', '=', 'periodes.id')->join('penilaians', 'hasils.penilaian_id', '=', 'penilaians.id')->select("periodes.keterangan as tanggal", "penilaians.keterangan", "hasils.periode_id", "hasils.penilaian_id", "hasils.id",)->orderBy('hasils.id', 'desc')->groupBy('hasils.periode_id','hasils.penilaian_id')->get();
+        $query = \App\Hasil::join('periodes', 'hasils.periode_id', '=', 'periodes.id')->join('penilaians', 'hasils.penilaian_id', '=', 'penilaians.id')->select("periodes.keterangan as tanggal", "penilaians.keterangan", "hasils.periode_id", "hasils.penilaian_id", "hasils.id",)->orderBy('hasils.id', 'desc')->groupBy('hasils.periode_id', 'hasils.penilaian_id')->get();
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -37,12 +37,12 @@ class HasilController extends Controller
     {
         $table = (new \App\Hasil)->getTable();
         $select = \DB::raw("@i := coalesce(@i + 1, 1) ranking, {$table}.*");
-        $query = \App\Hasil::where('penilaian_id',$penilaian)->where('periode_id',$periode)->with('atlet','penilaian')->select($select)->orderByDesc('nilai')->get();
+        $query = \App\Hasil::where('penilaian_id', $penilaian)->where('periode_id', $periode)->with('atlet', 'penilaian')->select($select)->orderByDesc('nilai')->get();
         // return $users;
         // $query = \App\Hasil::withRowNumber()->get();//where('hasils.periode_id',$periode)->where('hasils.penilaian_id',$penilaian)->join('periodes','periodes.id','=','hasils.periode_id')->join('atlets','atlets.id','=','hasils.atlet_id')->orderBy('hasils.nilai','desc')->select( \DB::raw("hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai,  1+(SELECT count(*) from hasils a WHERE a.nilai > b.nilai) as RNK"))->get();
         // return $query;
         // $query = \DB::select("SELECT hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai, RANK() OVER(ORDER BY hasils.nilai DESC) AS 'Ranking' FROM `hasils` JOIN periodes ON periodes.id = hasils.periode_id JOIN atlets ON atlets.id = hasils.atlet_id  WHERE hasils.penilaian_id=" . $penilaian . " and hasils.periode_id=" . $periode);
-       
+
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -63,14 +63,14 @@ class HasilController extends Controller
 
     public function dataTables3($penilaian, $periode)
     {
-      
-        
+
+
         $query = \App\DataAwal::where('periode_id', $periode)->where('penilaian_id', $penilaian)->with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
         //return $users;
         // $query = \App\Hasil::withRowNumber()->get();//where('hasils.periode_id',$periode)->where('hasils.penilaian_id',$penilaian)->join('periodes','periodes.id','=','hasils.periode_id')->join('atlets','atlets.id','=','hasils.atlet_id')->orderBy('hasils.nilai','desc')->select( \DB::raw("hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai,  1+(SELECT count(*) from hasils a WHERE a.nilai > b.nilai) as RNK"))->get();
         // return $query;
         // $query = \DB::select("SELECT hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai, RANK() OVER(ORDER BY hasils.nilai DESC) AS 'Ranking' FROM `hasils` JOIN periodes ON periodes.id = hasils.periode_id JOIN atlets ON atlets.id = hasils.atlet_id  WHERE hasils.penilaian_id=" . $penilaian . " and hasils.periode_id=" . $periode);
-       
+
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -91,14 +91,14 @@ class HasilController extends Controller
 
     public function dataTables4($penilaian, $periode)
     {
-      
-        
-     //$query = \App\GAP::where('periode_id', $periode)->where('penilaian_id', $penilaian)->with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
+
+
+        //$query = \App\GAP::where('periode_id', $periode)->where('penilaian_id', $penilaian)->with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
         //return $users;
         // $query = \App\Hasil::withRowNumber()->get();//where('hasils.periode_id',$periode)->where('hasils.penilaian_id',$penilaian)->join('periodes','periodes.id','=','hasils.periode_id')->join('atlets','atlets.id','=','hasils.atlet_id')->orderBy('hasils.nilai','desc')->select( \DB::raw("hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai,  1+(SELECT count(*) from hasils a WHERE a.nilai > b.nilai) as RNK"))->get();
         // return $query;
-         $query = \DB::select("SELECT atlets.nama, kriterias.keterangan, data_awals.nilai as nilaiawal, kriterias.nilai AS profilposisi, g_a_p_s.nilai AS nilaihasilgap FROM g_a_p_s JOIN kriterias ON kriterias.id = g_a_p_s.kriteria_id JOIN atlets ON atlets.id = g_a_p_s.atlet_id JOIN data_awals ON data_awals.periode_id = g_a_p_s.periode_id AND data_awals.penilaian_id = g_a_p_s.penilaian_id AND data_awals.atlet_id = g_a_p_s.atlet_id AND data_awals.kriteria_id = g_a_p_s.kriteria_id  WHERE g_a_p_s.penilaian_id=" . $penilaian . " and g_a_p_s.periode_id=" . $periode);
-       
+        $query = \DB::select("SELECT atlets.nama, kriterias.keterangan, data_awals.nilai as nilaiawal, kriterias.nilai AS profilposisi, g_a_p_s.nilai AS nilaihasilgap FROM g_a_p_s JOIN kriterias ON kriterias.id = g_a_p_s.kriteria_id JOIN atlets ON atlets.id = g_a_p_s.atlet_id JOIN data_awals ON data_awals.periode_id = g_a_p_s.periode_id AND data_awals.penilaian_id = g_a_p_s.penilaian_id AND data_awals.atlet_id = g_a_p_s.atlet_id AND data_awals.kriteria_id = g_a_p_s.kriteria_id  WHERE g_a_p_s.penilaian_id=" . $penilaian . " and g_a_p_s.periode_id=" . $periode);
+
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -119,14 +119,14 @@ class HasilController extends Controller
 
     public function dataTables5($penilaian, $periode)
     {
-      
-        
-     //$query = \App\GAP::where('periode_id', $periode)->where('penilaian_id', $penilaian)->with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
+
+
+        //$query = \App\GAP::where('periode_id', $periode)->where('penilaian_id', $penilaian)->with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
         //return $users;
         // $query = \App\Hasil::withRowNumber()->get();//where('hasils.periode_id',$periode)->where('hasils.penilaian_id',$penilaian)->join('periodes','periodes.id','=','hasils.periode_id')->join('atlets','atlets.id','=','hasils.atlet_id')->orderBy('hasils.nilai','desc')->select( \DB::raw("hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai,  1+(SELECT count(*) from hasils a WHERE a.nilai > b.nilai) as RNK"))->get();
         // return $query;
-         $query = \DB::select("SELECT atlets.nama, kriterias.keterangan, g_a_p_s.nilai AS g_a_p_s, normaisasi_bobots.nilai AS normaisasi_bobots FROM normaisasi_bobots JOIN atlets ON atlets.id = normaisasi_bobots.atlet_id JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN g_a_p_s ON g_a_p_s.atlet_id = normaisasi_bobots.atlet_id AND g_a_p_s.kriteria_id = normaisasi_bobots.kriteria_id AND g_a_p_s.periode_id = normaisasi_bobots.periode_id AND g_a_p_s.penilaian_id = normaisasi_bobots.penilaian_id  WHERE normaisasi_bobots.penilaian_id=" . $penilaian . " and normaisasi_bobots.periode_id=" . $periode);
-       
+        $query = \DB::select("SELECT atlets.nama, kriterias.keterangan, g_a_p_s.nilai AS g_a_p_s, normaisasi_bobots.nilai AS normaisasi_bobots FROM normaisasi_bobots JOIN atlets ON atlets.id = normaisasi_bobots.atlet_id JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN g_a_p_s ON g_a_p_s.atlet_id = normaisasi_bobots.atlet_id AND g_a_p_s.kriteria_id = normaisasi_bobots.kriteria_id AND g_a_p_s.periode_id = normaisasi_bobots.periode_id AND g_a_p_s.penilaian_id = normaisasi_bobots.penilaian_id  WHERE normaisasi_bobots.penilaian_id=" . $penilaian . " and normaisasi_bobots.periode_id=" . $periode);
+
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables
@@ -147,14 +147,15 @@ class HasilController extends Controller
 
     public function dataTables6($penilaian, $periode)
     {
-      
-        
-     //$query = \App\GAP::where('periode_id', $periode)->where('penilaian_id', $penilaian)->with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
+
+
+        //$query = \App\GAP::where('periode_id', $periode)->where('penilaian_id', $penilaian)->with('periode')->with('atlet')->with('penilaian')->with('kriteria')->get();
         //return $users;
         // $query = \App\Hasil::withRowNumber()->get();//where('hasils.periode_id',$periode)->where('hasils.penilaian_id',$penilaian)->join('periodes','periodes.id','=','hasils.periode_id')->join('atlets','atlets.id','=','hasils.atlet_id')->orderBy('hasils.nilai','desc')->select( \DB::raw("hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai,  1+(SELECT count(*) from hasils a WHERE a.nilai > b.nilai) as RNK"))->get();
         // return $query;
-         $query = \DB::select("SELECT atlets.nama, kriterias.keterangan AS kriterias, normaisasi_bobots.nilai,jenis_kriterias.keterangan, jenis_kriterias.nilai AS presentase FROM `coresecondaries` JOIN atlets ON atlets.id = coresecondaries.atlet_id JOIN normaisasi_bobots ON normaisasi_bobots.periode_id = coresecondaries.periode_id AND normaisasi_bobots.penilaian_id = coresecondaries.penilaian_id AND normaisasi_bobots.atlet_id = coresecondaries.atlet_id JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN jenis_kriterias ON jenis_kriterias.id = kriterias.jenisbobot_id  WHERE coresecondaries.penilaian_id=" . $penilaian . " and coresecondaries.periode_id=" . $periode);
-       
+        $query = \DB::select("SELECT atlets.nama, kriterias.keterangan AS kriterias, normaisasi_bobots.nilai,jenis_kriterias.keterangan, jenis_kriterias.nilai AS presentase FROM `coresecondaries` JOIN atlets ON atlets.id = coresecondaries.atlet_id JOIN normaisasi_bobots ON normaisasi_bobots.periode_id = coresecondaries.periode_id AND normaisasi_bobots.penilaian_id = coresecondaries.penilaian_id AND normaisasi_bobots.atlet_id = coresecondaries.atlet_id JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN jenis_kriterias ON jenis_kriterias.id = kriterias.jenisbobot_id  WHERE coresecondaries.penilaian_id=" . $penilaian . " and coresecondaries.periode_id=" . $periode." group by atlets.nama, kriterias.keterangan");
+        // $query = \DB::select("SELECT * FROM `coresecondaries`  WHERE coresecondaries.penilaian_id=" . $penilaian . " and coresecondaries.periode_id=" . $periode);
+
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru
         return \Yajra\Datatables\Datatables::of($query)
             //$query di masukkan kedalam Datatables

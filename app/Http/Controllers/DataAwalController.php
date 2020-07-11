@@ -145,7 +145,9 @@ class DataAwalController extends Controller
     }
     public function detailHitung($periodeID, $penilaianID)
     {
-        return view('hasil.detail', compact("periodeID", "penilaianID"));
+        $dataPenilaian = \App\Penilaian::find($penilaianID);
+        $dataPeriode = \App\Periode::find($periodeID);
+        return view('hasil.detail', compact("periodeID", "penilaianID", "dataPeriode", "dataPenilaian"));
     }
     public function hitungNormalisasi()
     {
