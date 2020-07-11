@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tableCoresecondary/{periode}/{penilaian}', 'HasilController@dataTables6')->name('tableCoresecondary');
         Route::get('detailHasil/{periode}/{penilaian}', 'DataAwalController@hitunggap')->name('detailHasil');
         Route::get('laporan/detail/{penilaian}/{periode}', 'DataAwalController@detailHitung')->name('detailHasil2');
-
+        Route::get('pdf/laporan/hitung-detail/{periode}/{penilaian}', 'PdfController@laporanDetail')->name('laporanDetailHitung');
         Route::resource('hitung', 'DataAwalController');
         Route::get('tableHitung', 'DataAwalController@dataTables')->name('tableHitung');
         Route::get('deletedatawal/{id}', 'DataAwalController@destroy')->name('deletedatawal');

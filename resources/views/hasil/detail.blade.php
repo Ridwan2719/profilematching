@@ -19,12 +19,11 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Tabel Data Awal
-                    <div class="card-tools">
-                        <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
-                        Tambah baru Bobot
-                    </a> -->
-                    </div>
+                    Table Data Awal </h3>
+
+                <div class="card-tools">
+                <a href="{{ route('laporanDetailHitung', ['penilaian' => $penilaianID,'periode' => $periodeID ]) }}" class='btn btn-primary btn-sm btn-flat '><i class='fas fa-fw fa-print ' aria-hidden="true"></i></a>
+                </div>
             </div>
             <div class="card-body">
 
@@ -212,121 +211,6 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('body').on('click', '.btn-action', function(elemen) {
-            elemen.preventDefault();
-            $(".btn-action").attr("disabled", true);
-            // if ($(this).hasClass('btn-create')) {
-            //     // showModal($(this));
-            //     var urls = $(this).attr('link');
-            //     window.open(urls);
-            // } else 
-            if ($(this).hasClass('btn-detail')) {
-                var urls = $(this).attr('link');
-                window.open(urls)
-                // } else if ($(this).hasClass('btn-edit')) {
-                //     var urls = $(this).attr('link');
-                //     window.open(urls)
-            } else if ($(this).hasClass('delete')) {
-                const urlsdelete = $(this).attr('link');
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to delete this!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.value) {
-                        axios({
-                            url: urlsdelete,
-                            credentials: true,
-                            method: "DELETE",
-                        }).then(response => {
-                            console.log(response);
-                            table.draw();
-                            swal2(data.status, data.message);
-
-                        }).catch(error => {
-                            table.draw();
-
-
-                        });
-                    }
-                })
-            }
-            $(".btn-action").attr("disabled", false);
-
-        });
-        $(document).ajaxStart(function() {
-            // Pace.restart();
-        });
-
-
-
-        function showModal(el) {
-            var urls = el.attr('link'),
-                title = el.attr('title');
-
-            $('.modal-title').text(title);
-
-            axios({
-                url: urls,
-                credentials: true,
-                method: "GET",
-            }).then(response => {
-                // // console.log(response);
-                $('.modal-content').html(response.data);
-                // // initElem();
-                $('#modal-button').text(el.hasClass('edit') ? 'Edit' : 'Simpan');
-                if (el.hasClass('btn-addlink')) {
-                    $('#invisible_id').val('1');
-
-                }
-                $('.modal').modal('show');
-
-            }).catch(error => {
-                console.log(error.response);
-            });
-        }
-        $('body').on('click', '#saveBtn', function(e) {
-            e.preventDefault();
-            $(this).html('Sending..');
-            $("#btnSubmit").attr("disabled", true);
-
-            $.ajax({
-                data: $('#my_form').serialize(),
-                url: $('#my_form').attr("action"),
-                type: $('#my_form').attr("method"),
-                dataType: 'json',
-                success: function(data) {
-
-                    $('#my_form').trigger("reset");
-                    $('.modal').modal('hide');
-                    swal2("success", data.message);
-                    table.draw();
-
-                },
-                error: function(data) {
-                    swal2("error", data.statusText);
-
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Save Changes');
-                }
-            });
-            $("#btnSubmit").attr("disabled", false);
-
-        });
-
-        function swal2(types, titles) {
-            Swal.fire({
-                position: 'top-end',
-                type: types,
-                title: titles,
-                showConfirmButton: false,
-                timer: 2000
-            })
-        }
         table =
             $('#table_hasil').DataTable({
                 //server-side

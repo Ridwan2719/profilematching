@@ -7,8 +7,10 @@
 @if(!empty($url_edit))
 <a href="{{ $url_edit }}" class='btn btn-primary btn-sm btn-flat '><i class='fas fa-fw fa-edit ' aria-hidden="true"></i></a>
 @endif
+@if(!empty($url_print))
+<a href="{{ $url_print }}" class='btn btn-primary btn-sm btn-flat '><i class='fas fa-fw fa-print ' aria-hidden="true"></i></a>
+@endif
 @if(!empty($url_hapus))
 <button link="{{ $url_hapus }}" class='btn btn-danger btn-sm btn-action delete btn-flat '><i class="fa fa-trash" aria-hidden="true"></i></button>
-
 @endif
 {{-- <button class  = 'btn btn-danger btn-sm btn-action'><i class  = 'fa fa-close'></i></button> --}}

@@ -27,6 +27,7 @@ class HasilController extends Controller
                     // 'url_edit'   => route('penilaian.edit', $q->id),
                     'url_hapus'  => route('hasil.destroy', $q->id),
                     'url_detail' => route('detailHasil2', ['periode' => $q->periode_id, 'penilaian' => $q->penilaian_id]),
+                    'url_print' => route('laporanDetailHitung', ['periode' => $q->periode_id, 'penilaian' => $q->penilaian_id]),
                 ]);
             })
             ->addIndexColumn()
