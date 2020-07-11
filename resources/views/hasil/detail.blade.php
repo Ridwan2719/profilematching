@@ -30,14 +30,14 @@
             <div class="card-body">
 
 
-                <table class="table table-striped" id="table_dataawal">
+                <table class="table table-striped" id="table_dataawal1">
                     <thead>
                         <tr>
                             <th witdh="5%">No</th>
                             <th witdh="40%">Atlet</th>
                             <th witdh="30%">Kriteria</th>
                             <th witdh="20%">Nilai</th>
-                            <th witdh="5%">Action</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -58,7 +58,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                Tabel Gaps (Data Awal - Nilai Standar Per Kriteria)
+                Tabel Gaps (Data Awal - Nilai Profil Posisi Per Kriteria)
                 <div class="card-tools">
                     <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
                         Tambah baru Bobot
@@ -75,9 +75,9 @@
                             <th witdh="20%">Atlet</th>
                             <th witdh="25%">Kriteria</th>
                             <th witdh="15%">Nilai Awal</th>
-                            <th witdh="15%">Nilai Standart</th>
+                            <th witdh="15%">Profil Posisi</th>
                             <th witdh="15%">Nilai GAP</th>
-                            <th witdh="5%">Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -116,7 +116,7 @@
                             <th witdh="20%">Kriteria</th>
                             <th witdh="20%">Nilai GAP</th>
                             <th witdh="20%">Nilai Normalisasi</th>
-                            <th witdh="5%">Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -156,7 +156,7 @@
                             <th witdh="15%">Nilai Normalisasi</th>
                             <th witdh="15%">Jenis Kriteria</th>
                             <th witdh="15%">Persentase Jenis Kriteria</th>
-                            <th witdh="5%">Action</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -177,7 +177,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Tabel Hasil Perhitungan
+                    Tabel Hasil Perhitungan (Hasil Dari Penjumlahan Nilai Core + Nilai Secondary Per Atlet)
                 <div class="card-tools">
                     <!-- <a href="{{ route('bobot.create') }}" class="btn btn-primary  btn-sm btn-flat">
                         Tambah baru Bobot
@@ -191,8 +191,10 @@
                     <thead>
                         <tr>
                             <th witdh="5%">No</th>
-                            <th witdh="65">Nama</th>
-                            <th witdh="20%">Nilai</th>
+                            <th witdh="25%">Nama</th>
+                            <th witdh="20%">Core</th>
+                            <th witdh="20%">Secondary</th>
+                            <th witdh="20%">Nilai Akhir</th>
                             <th witdh="10%">Ranking</th>
                         </tr>
                     </thead>
@@ -352,12 +354,194 @@
                     },
 
                     {
+                        data: 'nilai',
+                        name: 'nilai'
+                    },
+
+                    {
+                        data: 'nilai',
+                        name: 'nilai'
+                    },
+
+                    {
                         data: 'ranking',
                         name: 'ranking'
                     },
 
                 ]
             });
+
+            tabledata =
+            $('#table_dataawal1').DataTable({
+                //server-side
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": "{{ route('tableDataawal', ['penilaian' => $penilaianID,'periode' => $periodeID ]) }}",
+                    "type": "GET"
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+
+                    {
+                        data: 'atlet.nama',
+                        name: 'atlet.nama'
+                    },
+
+                    
+                    {
+                        data: 'kriteria.keterangan',
+                        name: 'Kriteria'
+                    },
+
+                    {
+                        data: 'nilai',
+                        name: 'nilai'
+                    },
+
+
+                ]
+            });
+
+            tablegaps =
+            $('#table_gaps').DataTable({
+                //server-side
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": "{{ route('tableGaps', ['penilaian' => $penilaianID,'periode' => $periodeID ]) }}",
+                    "type": "GET"
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+
+                    {
+                        data: 'nama',
+                        name: 'nama'
+                    },
+
+                    
+                    {
+                        data: 'keterangan',
+                        name: 'Kriteria'
+                    },
+
+                    {
+                        data: 'nilaiawal',
+                        name: 'nilaiawal'
+                    },
+
+                    {
+                        data: 'profilposisi',
+                        name: 'profilposisi'
+                    },
+
+                    {
+                        data: 'nilaihasilgap',
+                        name: 'nilaihasilgap'
+                    },
+
+
+
+                ]
+            });
+
+            tablenormalisasi =
+            $('#table_normalisasi').DataTable({
+                //server-side
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": "{{ route('tableNormalisasi', ['penilaian' => $penilaianID,'periode' => $periodeID ]) }}",
+                    "type": "GET"
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+
+                    {
+                        data: 'nama',
+                        name: 'nama'
+                    },
+
+                    {
+                        data: 'keterangan',
+                        name: 'Kriteria'
+                    },
+
+                    {
+                        data: 'g_a_p_s',
+                        name: 'g_a_p_s'
+                    },
+
+                    {
+                        data: 'normaisasi_bobots',
+                        name: 'normaisasi_bobots'
+                    },
+
+                ]
+            });
+
+
+            tablecoresecondary =
+            $('#table_coresecondary').DataTable({
+                //server-side
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    "url": "{{ route('tableCoresecondary', ['penilaian' => $penilaianID,'periode' => $periodeID ]) }}",
+                    "type": "GET"
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+
+                    {
+                        data: 'nama',
+                        name: 'nama'
+                    },
+   
+                    {
+                        data: 'kriterias',
+                        name: 'kriterias'
+                    },
+
+                    {
+                        data: 'nilai',
+                        name: 'nilai'
+                    },
+
+                    {
+                        data: 'keterangan',
+                        name: 'keterangan'
+                    },
+
+                    {
+                        data: 'presentase',
+                        name: 'presentase'
+                    },
+
+
+
+                ]
+            });
+
+
+
 
     });
 </script>

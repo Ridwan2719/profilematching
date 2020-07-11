@@ -62,6 +62,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('tableHasil', 'HasilController@dataTables')->name('tableHasil');
         // Route::get('hasiledelete/{}', 'HasilController@destory')->name('hasiledelete');
         Route::get('tableHasildetail/{periode}/{penilaian}', 'HasilController@dataTables2')->name('tableHasildetail');
+        Route::get('tableDataawal/{periode}/{penilaian}', 'HasilController@dataTables3')->name('tableDataawal');
+        Route::get('tableGaps/{periode}/{penilaian}', 'HasilController@dataTables4')->name('tableGaps');
+        Route::get('tableNormalisasi/{periode}/{penilaian}', 'HasilController@dataTables5')->name('tableNormalisasi');
+        Route::get('tableCoresecondary/{periode}/{penilaian}', 'HasilController@dataTables6')->name('tableCoresecondary');
         Route::get('detailHasil/{periode}/{penilaian}', 'DataAwalController@hitunggap')->name('detailHasil');
         Route::get('laporan/detail/{penilaian}/{periode}', 'DataAwalController@detailHitung')->name('detailHasil2');
 
