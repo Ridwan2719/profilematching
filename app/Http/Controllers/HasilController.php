@@ -37,7 +37,10 @@ class HasilController extends Controller
     public function dataTables2($penilaian, $periode)
     {
         $table = (new \App\Hasil)->getTable();
-        $select = \DB::raw("@i := coalesce(@i + 1, 1) ranking, {$table}.*");
+        $secondary = (new \App\Coresecondary())->getTable();
+        // $select = \DB::raw("@i := coalesce(@i + 1, 1) ranking, {$table}.*");
+        $select = \DB::raw("@i := coalesce(@i + 1, 1) ranking, {$table}.*, (select sum(hasil) as core  from {$secondary} where {$secondary}.jenisbobot_id=2 and {$secondary}.penilaian_id={$table}.penilaian_id and {$secondary}.periode_id={$table}.periode_id and {$secondary}.atlet_id={$table}.atlet_id  ) as SecondCore,(select sum(hasil) as core  from {$secondary} where {$secondary}.jenisbobot_id=1 and {$secondary}.penilaian_id={$table}.penilaian_id and {$secondary}.periode_id={$table}.periode_id and {$secondary}.atlet_id={$table}.atlet_id  ) as Core");
+
         $query = \App\Hasil::where('penilaian_id', $penilaian)->where('periode_id', $periode)->with('atlet', 'penilaian')->select($select)->orderByDesc('nilai')->get();
         // return $users;
         // $query = \App\Hasil::withRowNumber()->get();//where('hasils.periode_id',$periode)->where('hasils.penilaian_id',$penilaian)->join('periodes','periodes.id','=','hasils.periode_id')->join('atlets','atlets.id','=','hasils.atlet_id')->orderBy('hasils.nilai','desc')->select( \DB::raw("hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai,  1+(SELECT count(*) from hasils a WHERE a.nilai > b.nilai) as RNK"))->get();
@@ -154,7 +157,7 @@ class HasilController extends Controller
         //return $users;
         // $query = \App\Hasil::withRowNumber()->get();//where('hasils.periode_id',$periode)->where('hasils.penilaian_id',$penilaian)->join('periodes','periodes.id','=','hasils.periode_id')->join('atlets','atlets.id','=','hasils.atlet_id')->orderBy('hasils.nilai','desc')->select( \DB::raw("hasils.atlet_id, atlets.nama, periodes.keterangan, hasils.nilai,  1+(SELECT count(*) from hasils a WHERE a.nilai > b.nilai) as RNK"))->get();
         // return $query;
-        $query = \DB::select("SELECT atlets.nama, kriterias.keterangan AS kriterias, normaisasi_bobots.nilai,jenis_kriterias.keterangan, jenis_kriterias.nilai AS presentase FROM `coresecondaries` JOIN atlets ON atlets.id = coresecondaries.atlet_id JOIN normaisasi_bobots ON normaisasi_bobots.periode_id = coresecondaries.periode_id AND normaisasi_bobots.penilaian_id = coresecondaries.penilaian_id AND normaisasi_bobots.atlet_id = coresecondaries.atlet_id JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN jenis_kriterias ON jenis_kriterias.id = kriterias.jenisbobot_id  WHERE coresecondaries.penilaian_id=" . $penilaian . " and coresecondaries.periode_id=" . $periode." group by atlets.nama, kriterias.keterangan");
+        $query = \DB::select("SELECT atlets.nama, kriterias.keterangan AS kriterias, normaisasi_bobots.nilai,jenis_kriterias.keterangan, jenis_kriterias.nilai AS presentase FROM `coresecondaries` JOIN atlets ON atlets.id = coresecondaries.atlet_id JOIN normaisasi_bobots ON normaisasi_bobots.periode_id = coresecondaries.periode_id AND normaisasi_bobots.penilaian_id = coresecondaries.penilaian_id AND normaisasi_bobots.atlet_id = coresecondaries.atlet_id JOIN kriterias ON kriterias.id = normaisasi_bobots.kriteria_id JOIN jenis_kriterias ON jenis_kriterias.id = kriterias.jenisbobot_id  WHERE coresecondaries.penilaian_id=" . $penilaian . " and coresecondaries.periode_id=" . $periode );
         // $query = \DB::select("SELECT * FROM `coresecondaries`  WHERE coresecondaries.penilaian_id=" . $penilaian . " and coresecondaries.periode_id=" . $periode);
 
         //$query mempunyai isi semua data di table users, dan diurutkan dari data yang terbaru

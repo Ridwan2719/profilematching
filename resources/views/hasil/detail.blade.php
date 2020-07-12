@@ -232,13 +232,13 @@
                         name: 'atlet.nama'
                     },
                     {
-                        data: 'nilai',
-                        name: 'nilai'
+                        data: 'Core',
+                        name: 'Core'
                     },
 
                     {
-                        data: 'nilai',
-                        name: 'nilai'
+                        data: 'SecondCore',
+                        name: 'SecondCore'
                     },
 
                     {

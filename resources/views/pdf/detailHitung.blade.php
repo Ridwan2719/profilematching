@@ -179,6 +179,8 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Core</th>
+                    <th>SecondCore</th>
                     <th>Nilai Akhir</th>
                     <th>Rangking</th>
                 </tr>
@@ -190,6 +192,8 @@
                     <td>{{ $i++ }}</td>
                     <td>{{ $a->atlet->nama }}</td>
                     <td>{{ $a->nilai }}</td>
+                    <td>{{ $a->Core }}</td>
+                    <td>{{ $a->SecondCore }}</td>
                     <td>{{ $a->ranking }}</td>
                 </tr>
                 @endforeach
