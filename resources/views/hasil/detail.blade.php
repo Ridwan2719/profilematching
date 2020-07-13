@@ -3,7 +3,7 @@
 @section('title', 'Detail Hasil')
 
 @section('content_header')
-<h1 class="m-0 text-dark">Detail Hasil Penilaian {{$dataPenilaian->keterangan}} Periode {{$dataPeriode->keterangan}} </h1>
+<h1 class="m-0 text-dark">Detail Hasil Penilaian  </h1>
 @stop
 
 @section('content')
@@ -278,7 +278,7 @@
 
                     {
                         data: 'kriteria.keterangan',
-                        name: 'Kriteria'
+                        name: 'kriteria.keterangan'
                     },
 
                     {
@@ -314,7 +314,7 @@
 
                     {
                         data: 'keterangan',
-                        name: 'Kriteria'
+                        name: 'keterangan'
                     },
 
                     {
@@ -360,7 +360,7 @@
 
                     {
                         data: 'keterangan',
-                        name: 'Kriteria'
+                        name: 'keterangan'
                     },
 
                     {

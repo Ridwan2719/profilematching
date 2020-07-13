@@ -19,7 +19,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    Data Atlet</h3>
+                    Data Kelas Atlet</h3>
 
                 <div class="card-tools">
                     <a href="{{ route('atlet.create') }}" class="btn btn-primary  btn-sm btn-flat">
@@ -33,11 +33,10 @@
                 <table class="table table-striped" id="table">
                     <thead>
                         <tr>
-                            <th witdh="5%">No</th>
-                            <th witdh="50%">Nama</th>
-                            <th witdh="20%">Bobot</th>
-                            <th witdh="20%">Umur</th>
-                            <th witdh="10%">Action</th>
+                        <th witdh="5%">No</th>
+                            <th witdh="65">Tanggal</th>
+                            <th witdh="20%">Penilaian</th>
+                            <th witdh="10%">action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -181,7 +180,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    'url': "{!! route('tableAtlet') !!}",
+                    'url': "{!! route('detailAtlet',$atlet->id) !!}",
                     "type": "GET"
                 },
                 columns: [{
@@ -191,17 +190,12 @@
                         searchable: false
                     },
                     {
-                        data: 'nama',
-                        name: 'nama'
+                        data: 'tanggal',
+                        name: 'tanggal'
                     },
                     {
-                        data: 'kelas',
-                        name: 'kelas'
-                    },
-
-                    {
-                        data: 'umur',
-                        name: 'umur'
+                        data: 'keterangan',
+                        name: 'keterangan'
                     },
 
                     {

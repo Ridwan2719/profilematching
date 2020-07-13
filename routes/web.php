@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('atlet', 'AtletController');
         Route::get('tableAtlet', 'AtletController@dataTables')->name('tableAtlet');
+        Route::get('tableDetail/{atlet}', 'AtletController@dataTables2')->name('detailAtlet');
 
         Route::resource('hasil', 'HasilController');
         Route::get('tableHasil', 'HasilController@dataTables')->name('tableHasil');
@@ -69,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('detailHasil/{periode}/{penilaian}', 'DataAwalController@hitunggap')->name('detailHasil');
         Route::get('laporan/detail/{penilaian}/{periode}', 'DataAwalController@detailHitung')->name('detailHasil2');
         Route::get('pdf/laporan/hitung-detail/{periode}/{penilaian}', 'PdfController@laporanDetail')->name('laporanDetailHitung');
+       
         Route::resource('hitung', 'DataAwalController');
         Route::get('tableHitung', 'DataAwalController@dataTables')->name('tableHitung');
         Route::get('deletedatawal/{id}', 'DataAwalController@destroy')->name('deletedatawal');
