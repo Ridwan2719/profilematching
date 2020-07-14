@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
         \App\BobotAwal::create([
             'gap_a' => 2,
             'gap_b' => 2,
-            'nilai' => 4,
+            'nilai' => 3.5,
             'jenisbobot_id' => 1,
             'keterangan' => "Kopetensi individu kelebihan 2 tingkat/level",
         ]);
@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
         \App\BobotAwal::create([
             'gap_a' => 3,
             'gap_b' => 3,
-            'nilai' => 3,
+            'nilai' => 2.5,
             'jenisbobot_id' => 1,
             'keterangan' => "Kopetensi individu kelebihan 3 tingkat/level",
         ]);
@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
         \App\BobotAwal::create([
             'gap_a' => 4,
             'gap_b' => 4,
-            'nilai' => 2,
+            'nilai' => 1.5,
             'jenisbobot_id' => 1,
             'keterangan' => "Kopetensi individu kelebihan 4 tingkat/level",
         ]);
@@ -127,8 +127,64 @@ class DatabaseSeeder extends Seeder
             'keterangan' => "Kopetensi individu kelebihan 1 tingkat/level",
         ]);
         \App\BobotAwal::create([
+            'gap_a' => 2,
+            'gap_b' => 0,
+            'nilai' => 4.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 1 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 3,
+            'gap_b' => 0,
+            'nilai' => 4.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 1 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 4,
+            'gap_b' => 0,
+            'nilai' => 4.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 1 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 5,
+            'gap_b' => 0,
+            'nilai' => 4.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 1 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
             'gap_a' => -1,
             'gap_b' => -5,
+            'nilai' => 4,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 1 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => -2,
+            'gap_b' => 0,
+            'nilai' => 4,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 1 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => -3,
+            'gap_b' => 0,
+            'nilai' => 4,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 1 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => -4,
+            'gap_b' => 0,
+            'nilai' => 4,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 1 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => -5,
+            'gap_b' => 0,
             'nilai' => 4,
             'jenisbobot_id' => 2,
             'keterangan' => "Kopetensi individu kekurangan 1 tingkat/level",
@@ -141,8 +197,64 @@ class DatabaseSeeder extends Seeder
             'keterangan' => "Kopetensi individu kelebihan 2 tingkat/level",
         ]);
         \App\BobotAwal::create([
+            'gap_a' => 7,
+            'gap_b' => 0,
+            'nilai' => 3.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 2 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 8,
+            'gap_b' => 0,
+            'nilai' => 3.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 2 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 9,
+            'gap_b' => 0,
+            'nilai' => 3.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 2 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 10,
+            'gap_b' => 0,
+            'nilai' => 3.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 2 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
             'gap_a' => -6,
             'gap_b' => -10,
+            'nilai' => 3,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 2 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => -7,
+            'gap_b' => 0,
+            'nilai' => 3,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 2 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => -8,
+            'gap_b' => 0,
+            'nilai' => 3,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 2 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => -9,
+            'gap_b' => 0,
+            'nilai' => 3,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 2 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => -10,
+            'gap_b' => 0,
             'nilai' => 3,
             'jenisbobot_id' => 2,
             'keterangan' => "Kopetensi individu kekurangan 2 tingkat/level",
@@ -155,12 +267,68 @@ class DatabaseSeeder extends Seeder
             'keterangan' => "Kopetensi individu kelebihan 3 tingkat/level",
         ]);
         \App\BobotAwal::create([
+            'gap_a' => 12,
+            'gap_b' => 0,
+            'nilai' => 2.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 3 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 13,
+            'gap_b' => 0,
+            'nilai' => 2.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 3 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 14,
+            'gap_b' => 0,
+            'nilai' => 2.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 3 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
+            'gap_a' => 15,
+            'gap_b' => 0,
+            'nilai' => 2.5,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kelebihan 3 tingkat/level",
+        ]);
+        \App\BobotAwal::create([
             'gap_a' => -11,
             'gap_b' => -15,
             'nilai' => 2,
             'jenisbobot_id' => 2,
             'keterangan' => "Kopetensi individu kekurangan 3 tingkat/level",
-        ]);
+        ]);   
+        \App\BobotAwal::create([
+            'gap_a' => -12,
+            'gap_b' => 0,
+            'nilai' => 2,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 3 tingkat/level",
+        ]);   
+        \App\BobotAwal::create([
+            'gap_a' => -13,
+            'gap_b' => 0,
+            'nilai' => 2,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 3 tingkat/level",
+        ]);   
+        \App\BobotAwal::create([
+            'gap_a' => -14,
+            'gap_b' => 0,
+            'nilai' => 2,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 3 tingkat/level",
+        ]);   
+        \App\BobotAwal::create([
+            'gap_a' => -15,
+            'gap_b' => 0,
+            'nilai' => 2,
+            'jenisbobot_id' => 2,
+            'keterangan' => "Kopetensi individu kekurangan 3 tingkat/level",
+        ]);   
         \App\Kriteria::create([
             'penilaian_id' => 1,
             'jenisbobot_id' => 1,
